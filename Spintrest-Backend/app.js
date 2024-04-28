@@ -1,7 +1,7 @@
-const users = require('./Controllers/users')
-const boards = require('./Controllers/boards')
-const pins = require('./Controllers/pins')
-const comments = require('./Controllers/comments')
+const users = require('./Controllers/userController')
+const boards = require('./Controllers/boardController')
+const pins = require('./Controllers/pinController')
+const comments = require('./Controllers/commentController')
 var express = require("express");
 var app = express()
 
