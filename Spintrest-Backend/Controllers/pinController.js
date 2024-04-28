@@ -1,3 +1,4 @@
+const pinService = require('../Services/pinService');
 const express = require('express')
 const router = express.Router()
 
