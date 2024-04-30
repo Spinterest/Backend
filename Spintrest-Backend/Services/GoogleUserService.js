@@ -8,12 +8,18 @@ const getUserWithEmail = async (googleUserEmail) => {
     return await googleUserRepository.getUserWithEmail(googleUserEmail);
 };
 
-// const loginUser = async (googleUserEmail) => {
-//     const result = await databaseContext.query(`select * from GoogleUser where googleUserEmail = '${googleUserEmail}';`);
-//     return googleUserModel(result.rows);
-// };
+const login = async (googleUserEmail) => {
+    let googleUser = await googleUserRepository.getUserWithEmail(googleUserEmail);
+    if (!googleUser) {
+        await googleUserRepository.addUserWithEmail(googleUserEmail);
+        googleUser = await googleUserRepository.getUserWithEmail(googleUserEmail);
+    }
+
+    return googleUser;
+}
 
 module.exports = {
     getUserWithID,
-    getUserWithEmail
+    getUserWithEmail,
+    login
 };

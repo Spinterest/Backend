@@ -20,13 +20,10 @@ router.get('/googleUserEmail/:googleUserEmail', async (request, response) => {
     response.send(result);
 });
 
-// Login/SignUp User
-// router.post('/login', async (request, response) => {
-//     const t = request.body
-//     const googleUser = GoogleUser({
-//         googleUserEmail: request.body.googleUserEmail
-//     });
-//     response.send(t);
-// });
+// Add user with googleUserEmail
+router.post('/login', async (request, response) => {
+    const result = await googleUserService.login(request.body.googleUserEmail);
+    response.send(result);
+});
 
 module.exports = router
