@@ -1,10 +1,13 @@
 const users = require('./Controllers/GoogleUserController');
 const boards = require('./Controllers/boardController');
-const pins = require('./Controllers/pinController');
+const pins = require('./Controllers/PinController');
 const comments = require('./Controllers/commentController');
 
 const express = require("express");
-const app = express()
+const app = express();
+
+// This allows us to read the request body as JSON
+app.use(express.json());
 
 app.get('/', function(req, res){
     res.send("Hello world!");
@@ -19,7 +22,7 @@ app.use('/comments', comments);
 app.all('*', function(req, res){
     res.send("API call does not exist");
  });
- 
+
 console.log(
     'App listening on: ',
     'http://localhost:8080/')

@@ -11,6 +11,11 @@ const getUserWithEmail = async (googleUserEmail) => {
     return googleUserModel(result.rows);
 };
 
+// const loginUser = async (googleUserEmail) => {
+//     const result = await databaseContext.query(`select * from GoogleUser where googleUserEmail = '${googleUserEmail}';`);
+//     return googleUserModel(result.rows);
+// };
+
 module.exports = {
     getUserWithID, 
     getUserWithEmail
