@@ -7,6 +7,12 @@ router.get('/', (request, response) => {
   response.send('Tags Home Page')
 });
 
+// Get Tag by TagName
+router.get('/tagName/:tagName', async (request, response) => {
+  const result = await tagService.getTagByName(request.params.tagName);
+  response.send(result);
+});
+
 // Create Tag
 router.post('/', async (request, response) => {
   const result = await tagService.addTag(request.body.tagName);
@@ -14,7 +20,7 @@ router.post('/', async (request, response) => {
 });
 
 // Get Filtered Tag Results
-router.get('/tagName/:tagName', async (request, response) => {
+router.get('/filter/tagName/:tagName', async (request, response) => {
   const result = await tagService.filterTags(request.params.tagName);
   response.send(result);
 });
