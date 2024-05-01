@@ -1,1 +1,0 @@
-const pinRepository = require('../Repositories/pinRepository');
