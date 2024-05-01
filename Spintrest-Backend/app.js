@@ -1,7 +1,7 @@
 const users = require('./Controllers/GoogleUserController');
 const boards = require('./Controllers/boardController');
 const pins = require('./Controllers/PinController');
-const comments = require('./Controllers/commentController');
+const pinComments = require('./Controllers/PinCommentController');
 const tags = require('./Controllers/TagController');
 const pinTags = require('./Controllers/PinTagsController');
 const boardPins = require('./Controllers/BoardPinsController');
@@ -20,7 +20,7 @@ app.get('/', function(req, res){
 app.use('/users', users);
 app.use('/boards', boards);
 app.use('/pins', pins);
-app.use('/comments', comments);
+app.use('/pinComments', pinComments);
 app.use('/tags', tags);
 app.use('/pinTags', pinTags);
 app.use('/boardPins', boardPins);
