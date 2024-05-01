@@ -19,6 +19,12 @@ router.put('/pinID', async (request, response) => {
   response.send(result);
 });
 
+// Create Pin
+router.post('/', async (request, response) => {
+  const result = await pinService.createPin(request.body);
+  response.send(result);
+});
+
 // Get User's Pins With googleUserID
 router.get('/googleUserID/:googleUserID', async (request, response) => {
   const result = await pinService.getUserPinsWithUserID(request.params.googleUserID);

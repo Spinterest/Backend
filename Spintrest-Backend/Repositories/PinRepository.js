@@ -11,6 +11,19 @@ const getPinWithID = async (pinID) => {
     return pinModel(result.rows);
 };
 
+const createPin = async (pin) => {
+    return await databaseContext.query(
+        `insert into 
+            Pin (googleUserID, pinTitle, pinDescription, pinLink)
+        values (
+            ${pin.googleUserID},
+            '${pin.pinTitle}',
+            '${pin.pinDescription}',
+            '${pin.pinLink}'    
+        );`
+    );
+}
+
 const getUserPinsWithUserID = async (googleUserID) => {
     const result = await databaseContext.query(
         `select * 
@@ -73,5 +86,6 @@ module.exports = {
     getUserPinsWithUserEmail,
     deletePinWithID,
     deleteUserPinsWithUserID,
-    deleteUserPinsWithUserEmail
+    deleteUserPinsWithUserEmail,
+    createPin
 };

@@ -24,11 +24,16 @@ const deleteUserPinsWithUserEmail = async (googleUserEmail) => {
     return pinRepository.deleteUserPinsWithUserEmail(googleUserEmail);
 };
 
+const createPin = async (pin) => {
+    return pinRepository.createPin(pin);
+};
+
 module.exports = {
     getPinWithID,
     getUserPinsWithUserID,
     getUserPinsWithUserEmail,
     deletePinWithID,
     deleteUserPinsWithUserID,
-    deleteUserPinsWithUserEmail
+    deleteUserPinsWithUserEmail,
+    createPin
 };
