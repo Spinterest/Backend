@@ -4,6 +4,7 @@ const pins = require('./Controllers/PinController');
 const comments = require('./Controllers/commentController');
 const tags = require('./Controllers/TagController');
 const pinTags = require('./Controllers/PinTagsController');
+const boardPins = require('./Controllers/BoardPinsController');
 
 const express = require("express");
 const app = express();
@@ -22,6 +23,7 @@ app.use('/pins', pins);
 app.use('/comments', comments);
 app.use('/tags', tags);
 app.use('/pinTags', pinTags);
+app.use('/boardPins', boardPins);
 
 app.all('*', function(req, res){
     res.send("API call does not exist");

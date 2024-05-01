@@ -1,5 +1,4 @@
 const databaseContext = require('../Data/databaseContext');
-const pinTagsModel = require('../Models/PinTagsModel');
 
 const addTagToPin = async (pinTag) => {
     return await databaseContext.query(
@@ -10,7 +9,7 @@ const addTagToPin = async (pinTag) => {
 }
 
 const removeTagFromPin = async (pinTag) => {
-    return  await databaseContext.query(
+    return await databaseContext.query(
         `delete from PinTags  
         where 
             pinID = ${pinTag.pinID} and 
