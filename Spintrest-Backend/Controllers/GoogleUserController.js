@@ -26,4 +26,16 @@ router.post('/login', async (request, response) => {
     response.send(result);
 });
 
+// Delete a user using googleUserEmail
+router.put('/googleUserEmail', async (request, response) => {
+    const result = await googleUserService.deleteUserWithEmail(request.body.googleUserEmail);
+    response.send(result);
+});
+
+// Delete a user using googleUserID
+router.put('/googleUserID', async (request, response) => {
+    const result = await googleUserService.deleteUserWithID(request.body.googleUserID);
+    response.send(result);
+});
+
 module.exports = router
