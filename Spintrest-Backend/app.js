@@ -2,6 +2,7 @@ const users = require('./Controllers/GoogleUserController');
 const boards = require('./Controllers/boardController');
 const pins = require('./Controllers/PinController');
 const comments = require('./Controllers/commentController');
+const tags = require('./Controllers/TagController');
 
 const express = require("express");
 const app = express();
@@ -18,6 +19,7 @@ app.use('/users', users);
 app.use('/boards', boards);
 app.use('/pins', pins);
 app.use('/comments', comments);
+app.use('/tags', tags);
 
 app.all('*', function(req, res){
     res.send("API call does not exist");
