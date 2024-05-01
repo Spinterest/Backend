@@ -1,1 +1,0 @@
-const boards = [1,2,3]; // Temp example
