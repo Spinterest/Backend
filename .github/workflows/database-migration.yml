@@ -26,5 +26,10 @@ jobs:
       - name: Install Flyway 
         run: sudo snap install flyway
         
-      - name: Run flyway
-        run: flyway migrate -password=${{ secrets.DB_PASSWORD }}
+      - name: Apply database migrations
+        run: cd flyway 
+             && ls 
+             && echo "flyway.password=${{secrets.DB_PASSWORD}}" >> flyway.conf 
+             && echo "flyway.user=${{secrets.DB_USERNAME}}" >> flyway.conf 
+             && echo -e "Running migrations!\n"
+             && flyway migrate
