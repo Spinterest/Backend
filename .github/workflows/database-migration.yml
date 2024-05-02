@@ -5,6 +5,8 @@ on:
     branches:
       - 'flyway/migrations/**'
 
+  workflow_dispatch:
+
 jobs:
   migrate-database:
     name: Test flyway migration scripts
