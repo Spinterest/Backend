@@ -7,6 +7,7 @@ const pinTags = require('./Controllers/PinTagsController');
 const boardPins = require('./Controllers/BoardPinsController');
 const pinLikes = require('./Controllers/PinLikesController');
 const commentLikes = require('./Controllers/CommentLikesController');
+const complexCalls = require('./Controllers/ComplexController');
 
 const express = require("express");
 const app = express();
@@ -28,6 +29,7 @@ app.use('/pinTags', pinTags);
 app.use('/boardPins', boardPins);
 app.use('/pinLikes', pinLikes);
 app.use('/commentLikes', commentLikes);
+app.use('/complexCalls', complexCalls);
 
 app.all('*', function(req, res){
     res.send("API call does not exist");
