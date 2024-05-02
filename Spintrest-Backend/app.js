@@ -1,11 +1,11 @@
-const users = require('./Controllers/GoogleUserController');
-const boards = require('./Controllers/boardController');
-const pins = require('./Controllers/PinController');
-const pinComments = require('./Controllers/PinCommentController');
+const crawlers = require('./Controllers/CrawlerController');
+const webs = require('./Controllers/WebController');
+const spins = require('./Controllers/SpinController');
+const spinComments = require('./Controllers/SpinCommentController');
 const tags = require('./Controllers/TagController');
-const pinTags = require('./Controllers/PinTagsController');
-const boardPins = require('./Controllers/BoardPinsController');
-const pinLikes = require('./Controllers/PinLikesController');
+const spinTags = require('./Controllers/SpinTagsController');
+const webSpins = require('./Controllers/WebSpinsController');
+const spinLikes = require('./Controllers/SpinLikesController');
 const commentLikes = require('./Controllers/CommentLikesController');
 
 const express = require("express");
@@ -19,14 +19,14 @@ app.get('/', function(req, res){
  });
 
 
-app.use('/users', users);
-app.use('/boards', boards);
-app.use('/pins', pins);
-app.use('/pinComments', pinComments);
+app.use('/crawlers', crawlers);
+app.use('/webs', webs);
+app.use('/spins', spins);
+app.use('/spinComments', spinComments);
 app.use('/tags', tags);
-app.use('/pinTags', pinTags);
-app.use('/boardPins', boardPins);
-app.use('/pinLikes', pinLikes);
+app.use('/spinTags', spinTags);
+app.use('/webSpins', webSpins);
+app.use('/spinLikes', spinLikes);
 app.use('/commentLikes', commentLikes);
 
 app.all('*', function(req, res){
