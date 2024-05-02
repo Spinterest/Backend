@@ -1,6 +1,9 @@
 const databaseContext = require('../Data/databaseContext');
+
+const Pin = require('../Models/PinModel');
+const Board = require('../Models/BoardModel');
 const GoogleUser = require('../Models/GoogleUserModel');
-const complexModels = require('../Models/ComplexModels');
+const PinComment = require('../Models/PinCommentModel');
 
 const getUsersWhoLikedComment = async (pinCommentID) => {
     const result = await databaseContext.query(
@@ -33,10 +36,81 @@ const getUsersWhoLikedPin = async (pinID) => {
             pl.pinID = ${pinID};`
     );
 
-    return  GoogleUser(result.rows);
+    return GoogleUser(result.rows);
+};
+
+const getCommentsForPin = async (pinID) => {
+    const result = await databaseContext.query(
+        `select pc.*
+        from
+            PinComment as pc
+            inner join Pin as p on p.pinID = pc.pinID
+        where
+            pc.pinCommentIsDeleted = false and
+            p.pinIsDeleted = false and
+            pc.pinID = ${pinID};`
+    );
+
+    return PinComment(result.rows);
+};
+
+const getPinsForBoard = async (
+    boardID,
+    isLimited
+) => {
+    const limitText = isLimited ? 'limit 4' : '';
+    const result = await databaseContext.query(
+        `select p.*
+        from
+            Pin as p
+            inner join BoardPins as bp on p.pinID = bp.pinID
+            inner join Board as b on b.boardID = bp.boardID
+        where
+            p.pinIsDeleted = false and
+            b.boardIsDeleted = false and
+            b.boardID = ${boardID}
+        ${limitText};`
+    );
+
+    return Pin(result.rows);
+};
+
+const getNumberOfPinsInBoard = async (boardID) => {
+    const result = await databaseContext.query(
+        `select count 
+            (*) as count
+        from
+            Pin as p
+            inner join BoardPins as bp on p.pinID = bp.pinID
+            inner join Board as b on b.boardID = bp.boardID
+        where
+            p.pinIsDeleted = false and
+            b.boardIsDeleted = false and
+            b.boardID = ${boardID};`
+    );
+
+    return result.rows[0];
+};
+
+const getBoardsForUser = async (googleUserID) => {
+    const result = await databaseContext.query(
+        `select b.*
+        from
+            Board as b
+            inner join GoogleUser as u on u.googleUserID = b.googleUserID
+        where
+            b.boardIsDeleted = false and
+            b.googleUserID = ${googleUserID};`
+    );
+
+    return Board(result.rows);
 };
 
 module.exports = {
     getUsersWhoLikedComment,
-    getUsersWhoLikedPin
+    getUsersWhoLikedPin,
+    getCommentsForPin,
+    getPinsForBoard,
+    getNumberOfPinsInBoard,
+    getBoardsForUser
 };

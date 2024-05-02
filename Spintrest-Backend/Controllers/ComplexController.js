@@ -19,5 +19,38 @@ router.get('/usersWhoLikedPin/:pinID', async (request, response) => {
   response.send(result);
 });
 
+// Get list of comments for a pin.
+router.get('/commentsForPin/:pinID', async (request, response) => {
+  const result = await complexService.getCommentsForPin(request.params.pinID);
+  response.send(result);
+});
+
+// Get unlimited list of pins for a board.
+router.get('/pinsForBoard/:boardID', async (request, response) => {
+  const result = await complexService.getPinsForBoard(request.params.boardID);
+  response.send(result);
+});
+
+// Get limited list of pins for a board.
+router.get('/limitedPinsForBoard/:boardID', async (request, response) => {
+  const result = await complexService.getPinsForBoard(
+      request.params.boardID,
+      true
+  );
+  response.send(result);
+});
+
+// Get number list of pins for a board.
+router.get('/numberOfPinsInBoard/:boardID', async (request, response) => {
+  const result = await complexService.getNumberOfPinsInBoard(request.params.boardID);
+  response.send(result);
+});
+
+// Get list of boards for a user.
+router.get('/boardsForUser/:googleUserID', async (request, response) => {
+  const result = await complexService.getBoardsForUser(request.params.googleUserID);
+  response.send(result);
+});
+
 
 module.exports = router
