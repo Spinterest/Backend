@@ -27,7 +27,22 @@ const getBoardsForUser = async (googleUserID) => {
     return await complexRepository.getBoardsForUser(googleUserID);
 }
 
+const getUserFeed = async (
+    googleUserID,
+    isLikedTags,
+    offset,
+    limit
+) => {
+    return await complexRepository.getUserFeed(
+        googleUserID,
+        isLikedTags,
+        offset || 0,
+        limit || 100
+    );
+};
+
 module.exports = {
+    getUserFeed,
     getPinsForBoard,
     getBoardsForUser,
     getCommentsForPin,

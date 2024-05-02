@@ -52,5 +52,27 @@ router.get('/boardsForUser/:googleUserID', async (request, response) => {
   response.send(result);
 });
 
+// Get Liked user feed
+router.get('/likedUserFeed', async (request, response) => {
+  const result = await complexService.getUserFeed(
+      request.body.googleUserID,
+      true,
+      request.body.offset,
+      request.body.limit
+  );
+  response.send(result);
+});
+
+// Get Disliked user feed
+router.get('/dislikedUserFeed', async (request, response) => {
+  const result = await complexService.getUserFeed(
+      request.body.googleUserID,
+      false,
+      request.body.offset,
+      request.body.limit
+  );
+  response.send(result);
+});
+
 
 module.exports = router

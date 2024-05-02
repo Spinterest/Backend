@@ -106,11 +106,42 @@ const getBoardsForUser = async (googleUserID) => {
     return Board(result.rows);
 };
 
+const getUserFeed = async (
+    googleUserID,
+    isLikedTags,
+    offset,
+    limit
+) => {
+    const notString = isLikedTags ? '' : 'not'
+    const result = await databaseContext.query(
+        `select
+            p.pinID,
+            min(p.pinLink) as pinLink
+        from
+            Pin as p
+            inner join PinTags as pt on p.pinID = pt.pinID
+            inner join Tag as t on t.tagID = pt.tagID
+        where
+            p.pinIsDeleted = false and
+            t.tagName ${notString} in (
+                select * 
+                from getUserLikedTags(${googleUserID})
+            )
+        group by
+            p.pinID
+        limit ${limit}
+        offset ${offset};`
+    );
+
+    return Pin(result.rows);
+};
+
 module.exports = {
-    getUsersWhoLikedComment,
-    getUsersWhoLikedPin,
-    getCommentsForPin,
+    getUserFeed,
     getPinsForBoard,
+    getBoardsForUser,
+    getCommentsForPin,
+    getUsersWhoLikedPin,
     getNumberOfPinsInBoard,
-    getBoardsForUser
+    getUsersWhoLikedComment
 };
