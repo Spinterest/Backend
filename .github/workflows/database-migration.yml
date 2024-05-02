@@ -1,13 +1,9 @@
-
-name: Database Migration Tests with Flyway
+name: Apply Migration Scripts to Prod DB
 
 on:
   push:
-    branches: [ "main" ]
-    paths:
-      - 'database/flyway/scripts/**'
-
-  workflow_dispatch:
+    branches:
+      - 'flyway/migrations/**'
 
 jobs:
   migrate-database:
@@ -24,7 +20,7 @@ jobs:
         run: sudo apt install snapd
         
       - name: Install Flyway 
-        run: sudo snap install flyway
+        run: sudo snap install flyway --classic
         
       - name: Apply database migrations
         run: cd flyway 
