@@ -4,8 +4,9 @@ const mapBoard = (board) => {
     return {
         boardID: board.boardid !== undefined ? board.boardid : board.boardID,
         googleUserID: board.googleuserid !== undefined ? board.googleuserid : board.googleUserID,
-        boardIsDeleted: board.boardisdeleted !== undefined ? board.boardisdeleted : board.boardIsDeleted,
-        boardTitle: board.boardtitle !== undefined ? board.boardtitle : board.boardTitle
+        boardTitle: board.boardtitle !== undefined ? board.boardtitle : board.boardTitle,
+        boardDescription: board.boarddescription !== undefined ? board.boarddescription : board.boardDescription,
+        boardIsDeleted: board.boardisdeleted !== undefined ? board.boardisdeleted : board.boardIsDeleted
     }
 }
 
