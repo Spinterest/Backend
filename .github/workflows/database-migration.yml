@@ -3,7 +3,7 @@ name: Apply Migration Scripts to Prod DB
 on:
   push:
     branches:
-      - 'flyway/migrations/**'
+      - 'main'
 
   workflow_dispatch:
 
