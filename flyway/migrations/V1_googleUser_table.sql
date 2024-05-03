@@ -1,8 +1,8 @@
-create table GoogleUser (
-	googleUserID serial,
-	googleUserEmail varchar(255),
-	googleUserIsDeleted boolean default false,
+create table Crawler (
+	crawlerID serial,
+	crawlerEmail varchar(255),
+	crawlerUserIsDeleted boolean default false,
 	
-	constraint google_user_pk primary key (googleUserID),
-	constraint google_user_uq unique (googleUserEmail)
+	constraint crawler_user_pk primary key (crawlerID),
+	constraint crawler_user_uq unique (crawlerEmail)
 );

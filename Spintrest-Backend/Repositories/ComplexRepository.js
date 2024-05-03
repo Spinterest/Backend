@@ -1,113 +1,113 @@
 const databaseContext = require('../Data/databaseContext');
 
-const Pin = require('../Models/PinModel');
-const Board = require('../Models/BoardModel');
-const GoogleUser = require('../Models/GoogleUserModel');
-const PinComment = require('../Models/PinCommentModel');
+const Spin = require('../Models/SpinModel');
+const Web = require('../Models/WebModel');
+const Crawler = require('../Models/CrawlerModel');
+const SpinComment = require('../Models/SpinCommentModel');
 
-const getUsersWhoLikedComment = async (pinCommentID) => {
+const getCrawlersWhoLikedComment = async (spinCommentID) => {
     const result = await databaseContext.query(
         `select
-            u.googleUserID,
-            u.googleUserEmail
+            c.crawlerID,
+            c.crawlerEmail
         from
             CommentLikes as cl
-            inner join PinComment as pc on cl.pinCommentID = pc.pinCommentID
-            inner join GoogleUser as u on cl.googleUserID = u.googleUserID
+            inner join SpinComment as sc on cl.spinCommentID = sc.spinCommentID
+            inner join Crawler as c on cl.crawlerID = c.crawlerID
         where
-            pc.pinCommentIsDeleted = false and
-            cl.pinCommentID = ${pinCommentID};`
+            sc.spinCommentIsDeleted = false and
+            cl.spinCommentID = ${spinCommentID};`
     );
 
-    return  GoogleUser(result.rows);
+    return  Crawler(result.rows);
 };
 
-const getUsersWhoLikedPin = async (pinID) => {
+const getCrawlersWhoLikedSpin = async (spinID) => {
     const result = await databaseContext.query(
         `select
-            u.googleUserID,
-            u.googleUserEmail
+            c.crawlerID,
+            c.crawlerEmail
         from
-            PinLikes as pl
-            inner join Pin as p on p.pinID = pl.pinID
-            inner join GoogleUser as u on pl.googleUserID = u.googleUserID
+            SpinLikes as sl
+            inner join Spin as s on s.spinID = sl.spinID
+            inner join Crawler as c on sl.crawlerID = c.crawlerID
         where
-            p.pinIsDeleted = false and
-            pl.pinID = ${pinID};`
+            s.spinIsDeleted = false and
+            sl.spinID = ${spinID};`
     );
 
-    return GoogleUser(result.rows);
+    return Crawler(result.rows);
 };
 
-const getCommentsForPin = async (pinID) => {
+const getCommentsForSpin = async (spinID) => {
     const result = await databaseContext.query(
-        `select pc.*
+        `select sc.*
         from
-            PinComment as pc
-            inner join Pin as p on p.pinID = pc.pinID
+            SpinComment as sc
+            inner join Spin as s on s.spinID = sc.spinID
         where
-            pc.pinCommentIsDeleted = false and
-            p.pinIsDeleted = false and
-            pc.pinID = ${pinID};`
+            sc.spinCommentIsDeleted = false and
+            s.spinIsDeleted = false and
+            sc.spinID = ${spinID};`
     );
 
-    return PinComment(result.rows);
+    return SpinComment(result.rows);
 };
 
-const getPinsForBoard = async (
-    boardID,
+const getSpinsForWeb = async (
+    webID,
     isLimited
 ) => {
     const limitText = isLimited ? 'limit 4' : '';
     const result = await databaseContext.query(
-        `select p.*
+        `select s.*
         from
-            Pin as p
-            inner join BoardPins as bp on p.pinID = bp.pinID
-            inner join Board as b on b.boardID = bp.boardID
+            Spin as s
+            inner join WebSpins as wp on s.spinID = wp.spinID
+            inner join Web as w on w.webID = wp.webID
         where
-            p.pinIsDeleted = false and
-            b.boardIsDeleted = false and
-            b.boardID = ${boardID}
+            s.spinIsDeleted = false and
+            w.webIsDeleted = false and
+            w.webID = ${webID}
         ${limitText};`
     );
 
-    return Pin(result.rows);
+    return Spin(result.rows);
 };
 
-const getNumberOfPinsInBoard = async (boardID) => {
+const getNumberOfSpinsInWeb = async (webID) => {
     const result = await databaseContext.query(
         `select count 
             (*) as count
         from
-            Pin as p
-            inner join BoardPins as bp on p.pinID = bp.pinID
-            inner join Board as b on b.boardID = bp.boardID
+            Spin as s
+            inner join WebSpins as wp on s.spinID = wp.spinID
+            inner join Web as w on w.webID = wp.webID
         where
-            p.pinIsDeleted = false and
-            b.boardIsDeleted = false and
-            b.boardID = ${boardID};`
+            s.spinIsDeleted = false and
+            w.webIsDeleted = false and
+            w.webID = ${webID};`
     );
 
     return result.rows[0];
 };
 
-const getBoardsForUser = async (googleUserID) => {
+const getWebsForCrawler = async (crawlerID) => {
     const result = await databaseContext.query(
-        `select b.*
+        `select w.*
         from
-            Board as b
-            inner join GoogleUser as u on u.googleUserID = b.googleUserID
+            Web as w
+            inner join Crawler as c on c.crawlerID = w.crawlerID
         where
-            b.boardIsDeleted = false and
-            b.googleUserID = ${googleUserID};`
+            w.webIsDeleted = false and
+            w.crawlerID = ${crawlerID};`
     );
 
-    return Board(result.rows);
+    return Web(result.rows);
 };
 
-const getUserFeed = async (
-    googleUserID,
+const getCrawlerFeed = async (
+    crawlerID,
     isLikedTags,
     offset,
     limit
@@ -115,33 +115,33 @@ const getUserFeed = async (
     const notString = isLikedTags ? '' : 'not'
     const result = await databaseContext.query(
         `select
-            p.pinID,
-            min(p.pinLink) as pinLink
+            s.spinID,
+            min(s.spinLink) as spinLink
         from
-            Pin as p
-            inner join PinTags as pt on p.pinID = pt.pinID
-            inner join Tag as t on t.tagID = pt.tagID
+            Spin as s
+            inner join SpinTags as st on s.spinID = st.spinID
+            inner join Tag as t on t.tagID = st.tagID
         where
-            p.pinIsDeleted = false and
+            s.spinIsDeleted = false and
             t.tagName ${notString} in (
                 select * 
-                from getUserLikedTags(${googleUserID})
+                from getCrawlerLikedTags(${crawlerID})
             )
         group by
-            p.pinID
+            s.spinID
         limit ${limit}
         offset ${offset};`
     );
 
-    return Pin(result.rows);
+    return Spin(result.rows);
 };
 
 module.exports = {
-    getUserFeed,
-    getPinsForBoard,
-    getBoardsForUser,
-    getCommentsForPin,
-    getUsersWhoLikedPin,
-    getNumberOfPinsInBoard,
-    getUsersWhoLikedComment
+    getCrawlerFeed,
+    getSpinsForWeb,
+    getWebsForCrawler,
+    getCommentsForSpin,
+    getCrawlersWhoLikedSpin,
+    getNumberOfSpinsInWeb,
+    getCrawlersWhoLikedComment
 };

@@ -14,10 +14,11 @@ const getWebWithID = async (webID) => {
 const createWeb = async (web) => {
     return await databaseContext.query(
         `insert into 
-            Web (crawlerID, webTitle)
+            Web (crawlerID, webTitle, webDescription)
         values (
             ${web.crawlerID},
-            '${web.webTitle}'
+            '${web.webTitle}',
+            '${web.webDescription}'
         );`
     );
 }

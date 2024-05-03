@@ -1,18 +1,18 @@
 const mapper = require('./ModelMapper');
 
-const mapPinComment = (pinComment) => {
+const mapSpinComment = (spinComment) => {
     return {
-        pinID: pinComment.pinid !== undefined ? pinComment.pinid : pinComment.pinID,
-        pinCommentID: pinComment.pincommentid !== undefined ? pinComment.pincommentid : pinComment.pinCommentID,
-        googleUserID: pinComment.googleuserid !== undefined ? pinComment.googleuserid : pinComment.googleUserID,
-        pinCommentMessage: pinComment.pincommentmessage !== undefined ? pinComment.pincommentmessage : pinComment.pinCommentMessage,
-        pinCommentTimestamp: pinComment.pincommenttimestamp !== undefined ? pinComment.pincommenttimestamp : pinComment.pinCommentTimestamp,
-        pinCommentIsDeleted: pinComment.pincommentisdeleted !== undefined ? pinComment.pincommentisdeleted : pinComment.pinCommentIsDeleted
+        spinID: spinComment.spinid !== undefined ? spinComment.spinid : spinComment.spinID,
+        spinCommentID: spinComment.spincommentid !== undefined ? spinComment.spincommentid : spinComment.spinCommentID,
+        crawlerID: spinComment.crawlerid !== undefined ? spinComment.crawlerid : spinComment.crawlerID,
+        spinCommentMessage: spinComment.spincommentmessage !== undefined ? spinComment.spincommentmessage : spinComment.spinCommentMessage,
+        spinCommentTimestamp: spinComment.spincommenttimestamp !== undefined ? spinComment.spincommenttimestamp : spinComment.spinCommentTimestamp,
+        spinCommentIsDeleted: spinComment.spincommentisdeleted !== undefined ? spinComment.spincommentisdeleted : spinComment.spinCommentIsDeleted
     }
 }
 
-const PinComment = (pinComments) => {
-    return mapper(pinComments, mapPinComment);
+const SpinComment = (spinComments) => {
+    return mapper(spinComments, mapSpinComment);
 }
 
-module.exports = PinComment;
+module.exports = SpinComment;

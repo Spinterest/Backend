@@ -3,7 +3,7 @@ const mapper = require('./ModelMapper');
 const mapSpinLikes = (spinLike) => {
     return {
         spinLikeID: spinLike.spinlikeid !== undefined ? spinLike.spinlikeid : spinLike.spinLikeID,
-        googleUserID: spinLike.googleuserid !== undefined ? spinLike.googleuserid : spinLike.googleUserID,
+        crawlerID: spinLike.crawleruserid !== undefined ? spinLike.crawleruserid : spinLike.crawlerID,
         spinID: spinLike.spinid !== undefined ? spinLike.spinid : spinLike.spinID
     }
 }

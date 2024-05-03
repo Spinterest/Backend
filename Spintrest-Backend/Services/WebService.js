@@ -1,11 +1,11 @@
 const webRepository = require('../Repositories/WebRepository');
 
-const getWebWithID = async (pinID) => {
-    return webRepository.getWebWithID(pinID);
+const getWebWithID = async (spinID) => {
+    return webRepository.getWebWithID(spinID);
 };
 
-const deleteWebWithID = async (pinID) => {
-    return webRepository.deleteWebWithID(pinID);
+const deleteWebWithID = async (spinID) => {
+    return webRepository.deleteWebWithID(spinID);
 };
 
 const getUserWebsWithUserID = async (crawlerID) => {
@@ -24,8 +24,8 @@ const deleteUserWebsWithUserEmail = async (crawlerEmail) => {
     return webRepository.deleteUserWebsWithUserEmail(crawlerEmail);
 };
 
-const createWeb = async (pin) => {
-    return webRepository.createWeb(pin);
+const createWeb = async (web) => {
+    return webRepository.createWeb(web);
 };
 
 module.exports = {

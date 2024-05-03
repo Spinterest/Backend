@@ -5,12 +5,12 @@ const makeCommentToSpin = async (spinComment) => {
     return await databaseContext.query(
         `insert into 
             SpinComment (
-                googleUserID, 
+                crawlerID, 
                 spinID, 
                 spinCommentMessage
             )
         values (
-            ${spinComment.googleUserID},
+            ${spinComment.crawlerID},
             ${spinComment.spinID},
             '${spinComment.spinCommentMessage}'
         );`

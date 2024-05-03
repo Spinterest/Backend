@@ -5,7 +5,7 @@ const router = express.Router();
 
 // Todo, might want to remove await
 router.get('/', (request, response) => {
-    response.send('Google User Homepage');
+    response.send('Crawler User Homepage');
 });
 
 // Get user with crawlerID
@@ -35,6 +35,18 @@ router.put('/crawlerEmail', async (request, response) => {
 // Delete a user using crawlerID
 router.put('/crawlerID', async (request, response) => {
     const result = await crawlerService.deleteUserWithID(request.body.crawlerID);
+    response.send(result);
+});
+
+// Edit a Crawler's UserName with their ID
+router.put('/editCrawlerNameWithID', async (request, response) => {
+    const result = await crawlerService.editCrawlerNameWithID(request.body);
+    response.send(result);
+});
+
+// Edit a Crawler's UserName with their Email
+router.put('/editCrawlerNameWithEmail', async (request, response) => {
+    const result = await crawlerService.editCrawlerNameWithEmail(request.body);
     response.send(result);
 });
 

@@ -30,48 +30,66 @@ const getUserWithEmail = async (
 };
 
 const addUserWithEmail = async (crawlerEmail) => {
-    const result = await databaseContext.query(
+    const crawlerUserName = crawlerEmail.split('@')[0];
+    return await databaseContext.query(
         `insert into 
-        Crawler (crawlerEmail) 
-        values ('${crawlerEmail}');`
+        Crawler (crawlerEmail, crawlerUserName) 
+        values ('${crawlerEmail}', '${crawlerUserName}');`
     );
-    return result;
 }
 
 const deleteUserWithID = async (crawlerID) => {
-    const result = await databaseContext.query(
+    return await databaseContext.query(
         `update Crawler
         set crawlerIsDeleted = true
         where crawlerID = ${crawlerID};`
     );
-    return result;
 }
 
 const deleteUserWithEmail = async (crawlerEmail) => {
-    const result = await databaseContext.query(
+    return await databaseContext.query(
         `update Crawler
         set crawlerIsDeleted = true
         where crawlerEmail = '${crawlerEmail}';`
     );
-    return result;
 }
 
 const restoreUserWithID = async (crawlerID) => {
-    const result = await databaseContext.query(
+    return await databaseContext.query(
         `update Crawler
         set crawlerIsDeleted = false
         where crawlerID = ${crawlerID};`
     );
-    return result;
 }
 
 const restoreUserWithEmail = async (crawlerEmail) => {
-    const result = await databaseContext.query(
+    return await databaseContext.query(
         `update Crawler
         set crawlerIsDeleted = false
         where crawlerEmail = '${crawlerEmail}';`
     );
-    return result.rowCount;
+}
+
+const editCrawlerNameWithID = async (
+    crawlerID,
+    crawlerUserName
+) => {
+    return await databaseContext.query(
+        `update Crawler
+        set crawlerUserName = '${crawlerUserName}'
+        where crawlerID = '${crawlerID}';`
+    );
+}
+
+const editCrawlerNameWithEmail = async (
+    crawlerEmail,
+    crawlerUserName
+) => {
+    return await databaseContext.query(
+        `update Crawler
+        set crawlerUserName = '${crawlerUserName}'
+        where crawlerEmail = '${crawlerEmail}';`
+    );
 }
 
 module.exports = {
@@ -81,5 +99,7 @@ module.exports = {
     deleteUserWithID,
     deleteUserWithEmail,
     restoreUserWithEmail,
-    restoreUserWithID
+    restoreUserWithID,
+    editCrawlerNameWithID,
+    editCrawlerNameWithEmail
 };

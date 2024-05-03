@@ -16,6 +16,20 @@ const deleteUserWithEmail = async (crawlerEmail) => {
     return await crawlerRepository.deleteUserWithEmail(crawlerEmail);
 };
 
+const editCrawlerNameWithID = async (crawler) => {
+    return await crawlerRepository.editCrawlerNameWithID(
+        crawler.crawlerID,
+        crawler.crawlerUserName
+    );
+};
+
+const editCrawlerNameWithEmail = async (crawler) => {
+    return await crawlerRepository.editCrawlerNameWithEmail(
+        crawler.crawlerEmail,
+        crawler.crawlerUserName
+    );
+};
+
 const login = async (crawlerEmail) => {
     let crawler = await crawlerRepository.getUserWithEmail(crawlerEmail);
     if (!crawler) {
@@ -39,5 +53,7 @@ module.exports = {
     getUserWithEmail,
     login,
     deleteUserWithID,
-    deleteUserWithEmail
+    deleteUserWithEmail,
+    editCrawlerNameWithID,
+    editCrawlerNameWithEmail
 };
