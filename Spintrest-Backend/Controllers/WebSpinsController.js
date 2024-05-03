@@ -1,21 +1,21 @@
-const pinTagsService = require('../Services/PinTagsService');
+const webSpinsService = require('../Services/WebSpinsService');
 const express = require('express')
 const router = express.Router()
 
 // Todo, might want to remove await
 router.get('/', (request, response) => {
-  response.send('PinTags Home Page')
+  response.send('WebSpins Home Page');
 });
 
-// Create PinTag
+// Create Web Spin
 router.post('/', async (request, response) => {
-  const result = await pinTagsService.addTagToPin(request.body);
+  const result = await webSpinsService.addSpinToWeb(request.body);
   response.send(result);
 });
 
-// Delete PinTag
+// Delete Web Spin
 router.delete('/', async (request, response) => {
-  const result = await pinTagsService.removeTagFromPin(request.body);
+  const result = await webSpinsService.removeSpinFromWeb(request.body);
   response.send(result);
 });
 
