@@ -1,60 +1,110 @@
-const queryWrapper = require('../SQLErrorHandler');
+const errorHandler = require('../SQLErrorHandler');
 const spinRepository = require('../Repositories/SpinRepository');
 
 const getSpinWithID = async (response, spinID) => {
-    return await queryWrapper(
-        response,
-        spinRepository.getSpinWithID,
-        spinID
-    );
+    if (
+        errorHandler.variableChecker(
+            response,
+            spinID
+        )
+    ){
+        return await errorHandler.queryWrapper(
+            response,
+            spinRepository.getSpinWithID,
+            spinID
+        );
+    }
 };
 
 const deleteSpinWithID = async (response, spinID) => {
-    return await queryWrapper(
-        response,
-        spinRepository.deleteSpinWithID,
-        spinID
-    );
+    if (
+        errorHandler.variableChecker(
+            response,
+            spinID
+        )
+    ){
+        return await errorHandler.queryWrapper(
+            response,
+            spinRepository.deleteSpinWithID,
+            spinID
+        );
+    }
 };
 
 const getUserSpinsWithUserID = async (response, crawlerID) => {
-    return await queryWrapper(
-        response,
-        spinRepository.getUserSpinsWithUserID,
-        crawlerID
-    );
+    if (
+        errorHandler.variableChecker(
+            response,
+            crawlerID
+        )
+    ){
+        return await errorHandler.queryWrapper(
+            response,
+            spinRepository.getUserSpinsWithUserID,
+            crawlerID
+        );
+    }
 };
 
 const getUserSpinsWithUserEmail = async (response, crawlerEmail) => {
-    return await queryWrapper(
-        response,
-        spinRepository.getUserSpinsWithUserEmail,
-        crawlerEmail
-    );
+    if (
+        errorHandler.variableChecker(
+            response,
+            crawlerEmail
+        )
+    ){
+        return await errorHandler.queryWrapper(
+            response,
+            spinRepository.getUserSpinsWithUserEmail,
+            crawlerEmail
+        );
+    }
 };
 
 const deleteUserSpinsWithUserID = async (response, crawlerID) => {
-    return await queryWrapper(
-        response,
-        spinRepository.deleteUserSpinsWithUserID,
-        crawlerID
-    );
+    if (
+        errorHandler.variableChecker(
+            response,
+            crawlerID
+        )
+    ){
+        return await errorHandler.queryWrapper(
+            response,
+            spinRepository.deleteUserSpinsWithUserID,
+            crawlerID
+        );
+    }
 };
 
 const deleteUserSpinsWithUserEmail = async (response, crawlerEmail) => {
-    return await queryWrapper(
-        response,
-        spinRepository.deleteUserSpinsWithUserEmail,
-        crawlerEmail
-    );
+    if (
+        errorHandler.variableChecker(
+            response,
+            crawlerEmail
+        )
+    ){
+        return await errorHandler.queryWrapper(
+            response,
+            spinRepository.deleteUserSpinsWithUserEmail,
+            crawlerEmail
+        );
+    }
 };
 
 const createSpin = async (response, spin) => {
-    return await queryWrapper(
-        response,
-        spinRepository.createSpin,
-        spin
-    );
+    if (
+        errorHandler.jsonChecker(
+            response,
+            spin,
+            ['spinLink', 'spinDescription', 'spinTitle', 'crawlerID']
+        )
+    ){
+        return await errorHandler.queryWrapper(
+            response,
+            spinRepository.createSpin,
+            spin
+        );
+    }
 };
 
 module.exports = {
