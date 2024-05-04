@@ -9,13 +9,13 @@ router.get('/', (request, response) => {
 
 // Create SpinTag
 router.post('/', async (request, response) => {
-  const result = await spinTagsService.addTagToSpin(request.body);
+  const result = await spinTagsService.addTagToSpin(response, request.body);
   response.send(result);
 });
 
 // Delete SpinTag
 router.delete('/', async (request, response) => {
-  const result = await spinTagsService.removeTagFromSpin(request.body);
+  const result = await spinTagsService.removeTagFromSpin(response, request.body);
   response.send(result);
 });
 

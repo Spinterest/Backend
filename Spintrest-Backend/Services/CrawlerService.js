@@ -1,37 +1,68 @@
+const queryWrapper = require('../SQLErrorHandler');
 const crawlerRepository = require('../Repositories/CrawlerRepository');
 
-const getUserWithID = async (crawlerID) => {
-    return await crawlerRepository.getUserWithID(crawlerID);
+const getUserWithID = async (response, crawlerID) => {
+    return await queryWrapper(
+        response,
+        crawlerRepository.getUserWithID,
+        crawlerID
+    );
 };
 
-const getUserWithEmail = async (crawlerEmail) => {
-    return await crawlerRepository.getUserWithEmail(crawlerEmail);
+const getUserWithEmail = async (response, crawlerEmail) => {
+    return await queryWrapper(
+        response,
+        crawlerRepository.getUserWithEmail,
+        crawlerEmail
+    );
 };
 
-const deleteUserWithID = async (crawlerID) => {
-    return await crawlerRepository.deleteUserWithID(crawlerID);
+const deleteUserWithID = async (response, crawlerID) => {
+    return await queryWrapper(
+        response,
+        crawlerRepository.deleteUserWithID,
+        crawlerID
+    );
 };
 
-const deleteUserWithEmail = async (crawlerEmail) => {
-    return await crawlerRepository.deleteUserWithEmail(crawlerEmail);
+const deleteUserWithEmail = async (response, crawlerEmail) => {
+    return await queryWrapper(
+        response,
+        crawlerRepository.deleteUserWithEmail,
+        crawlerEmail
+    );
 };
 
-const editCrawlerNameWithID = async (crawler) => {
-    return await crawlerRepository.editCrawlerNameWithID(
+const editCrawlerNameWithID = async (response, crawler) => {
+    return await queryWrapper(
+        response,
+        crawlerRepository.editCrawlerNameWithID,
         crawler.crawlerID,
         crawler.crawlerUserName
     );
 };
 
-const editCrawlerNameWithEmail = async (crawler) => {
-    return await crawlerRepository.editCrawlerNameWithEmail(
+const editCrawlerNameWithEmail = async (response, crawler) => {
+    return await queryWrapper(
+        response,
+        crawlerRepository.editCrawlerNameWithEmail,
         crawler.crawlerEmail,
         crawler.crawlerUserName
     );
 };
 
-const login = async (crawlerEmail) => {
-    let crawler = await crawlerRepository.getUserWithEmail(crawlerEmail);
+const login = async (response, crawlerEmail) => {
+    let crawler = await queryWrapper(
+        response,
+        crawlerRepository.getUserWithEmail,
+        crawlerEmail
+    );
+
+    // stop early if there was an issue with the query
+    if (response.status === 500) {
+        return;
+    }
+
     if (!crawler) {
         // We are checking again to see if they exist but their account is deleted
         crawler = await crawlerRepository.getUserWithEmail(crawlerEmail, true);

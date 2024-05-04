@@ -1,39 +1,67 @@
+const queryWrapper = require('../SQLErrorHandler');
 const complexRepository = require('../Repositories/ComplexRepository');
 
-const getCrawlersWhoLikedComment = async (spinCommentID) => {
-    return await complexRepository.getCrawlersWhoLikedComment(spinCommentID);
+const getCrawlersWhoLikedComment = async (response, spinCommentID) => {
+    return await queryWrapper(
+        response,
+        complexRepository.getCrawlersWhoLikedComment,
+        spinCommentID
+    );
 }
 
-const getCrawlersWhoLikedSpin = async (spinID) => {
-    return await complexRepository.getCrawlersWhoLikedSpin(spinID);
+const getCrawlersWhoLikedSpin = async (response, spinID) => {
+    return await queryWrapper(
+        response,
+        complexRepository.getCrawlersWhoLikedSpin,
+        spinID
+    );
 }
 
-const getCommentsForSpin = async (spinID) => {
-    return await complexRepository.getCommentsForSpin(spinID);
+const getCommentsForSpin = async (response, spinID) => {
+    return await queryWrapper(
+        response,
+        complexRepository.getCommentsForSpin,
+        spinID
+    );
 }
 
-const getSpinsForWeb = async (
+const getSpinsForWeb = async (response, 
     webID,
     isLimited = false
 ) => {
-    return await complexRepository.getSpinsForWeb(webID, isLimited);
+    return await queryWrapper(
+        response,
+        complexRepository.getSpinsForWeb,
+        webID,
+        isLimited
+    );
 }
 
-const getNumberOfSpinsInWeb = async (webID) => {
-    return await complexRepository.getNumberOfSpinsInWeb(webID);
+const getNumberOfSpinsInWeb = async (response, webID) => {
+    return await queryWrapper(
+        response,
+        complexRepository.getNumberOfSpinsInWeb,
+        webID
+    );
 }
 
-const getWebsForCrawler = async (crawlerID) => {
-    return await complexRepository.getWebsForCrawler(crawlerID);
+const getWebsForCrawler = async (response, crawlerID) => {
+    return await queryWrapper(
+        response,
+        complexRepository.getWebsForCrawler,
+        crawlerID
+    );
 }
 
-const getCrawlerFeed = async (
+const getCrawlerFeed = async (response, 
     crawlerID,
     isLikedTags,
     offset,
     limit
 ) => {
-    return await complexRepository.getCrawlerFeed(
+    return await queryWrapper(
+        response,
+        complexRepository.getCrawlerFeed,
         crawlerID,
         isLikedTags,
         offset || 0,

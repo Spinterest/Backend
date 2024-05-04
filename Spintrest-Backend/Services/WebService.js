@@ -1,31 +1,61 @@
+const queryWrapper = require('../SQLErrorHandler');
 const webRepository = require('../Repositories/WebRepository');
 
-const getWebWithID = async (spinID) => {
-    return webRepository.getWebWithID(spinID);
+const getWebWithID = async (response, spinID) => {
+    return await queryWrapper(
+        response,
+        webRepository.getWebWithID,
+        spinID
+    );
 };
 
-const deleteWebWithID = async (spinID) => {
-    return webRepository.deleteWebWithID(spinID);
+const deleteWebWithID = async (response, spinID) => {
+    return await queryWrapper(
+        response,
+        webRepository.deleteWebWithID,
+        spinID
+
+    );
 };
 
-const getUserWebsWithUserID = async (crawlerID) => {
-    return webRepository.getUserWebsWithUserID(crawlerID);
+const getUserWebsWithUserID = async (response, crawlerID) => {
+    return await queryWrapper(
+        response,
+        webRepository.getUserWebsWithUserID,
+        crawlerID
+    );
 };
 
-const getUserWebsWithUserEmail = async (crawlerEmail) => {
-    return webRepository.getUserWebsWithUserEmail(crawlerEmail);
+const getUserWebsWithUserEmail = async (response, crawlerEmail) => {
+    return await queryWrapper(
+        response,
+        webRepository.getUserWebsWithUserEmail,
+        crawlerEmail
+    );
 };
 
-const deleteUserWebsWithUserID = async (crawlerID) => {
-    return webRepository.deleteUserWebsWithUserID(crawlerID);
+const deleteUserWebsWithUserID = async (response, crawlerID) => {
+    return await queryWrapper(
+        response,
+        webRepository.deleteUserWebsWithUserID,
+        crawlerID
+    );
 };
 
-const deleteUserWebsWithUserEmail = async (crawlerEmail) => {
-    return webRepository.deleteUserWebsWithUserEmail(crawlerEmail);
+const deleteUserWebsWithUserEmail = async (response, crawlerEmail) => {
+    return await queryWrapper(
+        response,
+        webRepository.deleteUserWebsWithUserEmail,
+        crawlerEmail
+    );
 };
 
-const createWeb = async (web) => {
-    return webRepository.createWeb(web);
+const createWeb = async (response, web) => {
+    return await queryWrapper(
+        response,
+        webRepository.createWeb,
+        web
+    );
 };
 
 module.exports = {
