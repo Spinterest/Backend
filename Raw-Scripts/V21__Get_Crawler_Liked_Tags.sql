@@ -1,3 +1,4 @@
+drop function if exists getUserLikedTags(int);
 drop function if exists getCrawlerLikedTags(int);
 
 create or replace 
