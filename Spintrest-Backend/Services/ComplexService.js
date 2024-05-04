@@ -1,40 +1,40 @@
 const complexRepository = require('../Repositories/ComplexRepository');
 
-const getUsersWhoLikedComment = async (pinCommentID) => {
-    return await complexRepository.getUsersWhoLikedComment(pinCommentID);
+const getCrawlersWhoLikedComment = async (spinCommentID) => {
+    return await complexRepository.getCrawlersWhoLikedComment(spinCommentID);
 }
 
-const getUsersWhoLikedPin = async (pinID) => {
-    return await complexRepository.getUsersWhoLikedPin(pinID);
+const getCrawlersWhoLikedSpin = async (spinID) => {
+    return await complexRepository.getCrawlersWhoLikedSpin(spinID);
 }
 
-const getCommentsForPin = async (pinID) => {
-    return await complexRepository.getCommentsForPin(pinID);
+const getCommentsForSpin = async (spinID) => {
+    return await complexRepository.getCommentsForSpin(spinID);
 }
 
-const getPinsForBoard = async (
-    boardID,
+const getSpinsForWeb = async (
+    webID,
     isLimited = false
 ) => {
-    return await complexRepository.getPinsForBoard(boardID, isLimited);
+    return await complexRepository.getSpinsForWeb(webID, isLimited);
 }
 
-const getNumberOfPinsInBoard = async (boardID) => {
-    return await complexRepository.getNumberOfPinsInBoard(boardID);
+const getNumberOfSpinsInWeb = async (webID) => {
+    return await complexRepository.getNumberOfSpinsInWeb(webID);
 }
 
-const getBoardsForUser = async (googleUserID) => {
-    return await complexRepository.getBoardsForUser(googleUserID);
+const getWebsForCrawler = async (crawlerID) => {
+    return await complexRepository.getWebsForCrawler(crawlerID);
 }
 
-const getUserFeed = async (
-    googleUserID,
+const getCrawlerFeed = async (
+    crawlerID,
     isLikedTags,
     offset,
     limit
 ) => {
-    return await complexRepository.getUserFeed(
-        googleUserID,
+    return await complexRepository.getCrawlerFeed(
+        crawlerID,
         isLikedTags,
         offset || 0,
         limit || 100
@@ -42,11 +42,11 @@ const getUserFeed = async (
 };
 
 module.exports = {
-    getUserFeed,
-    getPinsForBoard,
-    getBoardsForUser,
-    getCommentsForPin,
-    getUsersWhoLikedPin,
-    getNumberOfPinsInBoard,
-    getUsersWhoLikedComment
+    getCrawlerFeed,
+    getSpinsForWeb,
+    getWebsForCrawler,
+    getCommentsForSpin,
+    getCrawlersWhoLikedSpin,
+    getNumberOfSpinsInWeb,
+    getCrawlersWhoLikedComment
 };

@@ -3,8 +3,8 @@ const databaseContext = require('../Data/databaseContext');
 const likeComment = async (commentLike) => {
     return await databaseContext.query(
         `insert into 
-        CommentLikes (googleUserID, pinCommentID) 
-        values (${commentLike.googleUserID}, ${commentLike.pinCommentID});`
+        CommentLikes (crawlerID, spinCommentID) 
+        values (${commentLike.crawlerID}, ${commentLike.spinCommentID});`
     );
 };
 
@@ -12,8 +12,8 @@ const removeLikeFromComment = async (commentLike) => {
     return await databaseContext.query(
         `delete from CommentLikes  
         where 
-            googleUserID = ${commentLike.googleUserID} and 
-            pinCommentID = ${commentLike.pinCommentID};`
+            crawlerID = ${commentLike.crawlerID} and 
+            spinCommentID = ${commentLike.spinCommentID};`
     );
 };
 

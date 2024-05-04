@@ -7,13 +7,13 @@ router.get('/', (request, response) => {
   response.send('Comment Likes Home Page')
 });
 
-// Like Pin
+// Like Spin
 router.post('/commentLike', async (request, response) => {
   const result = await commentLikesService.likeComment(request.body);
   response.send(result);
 });
 
-// Remove Like from Pin
+// Remove Like from Spin
 router.delete('/commentLike', async (request, response) => {
   const result = await commentLikesService.removeLikeFromComment(request.body);
   response.send(result);

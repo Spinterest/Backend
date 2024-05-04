@@ -8,54 +8,54 @@ router.get('/', (request, response) => {
 });
 
 // Get list of users that liked a comment.
-router.get('/usersWhoLikedComment/:pinCommentID', async (request, response) => {
-  const result = await complexService.getUsersWhoLikedComment(request.params.pinCommentID);
+router.get('/usersWhoLikedComment/:spinCommentID', async (request, response) => {
+  const result = await complexService.getCrawlersWhoLikedComment(request.params.spinCommentID);
   response.send(result);
 });
 
-// Get list of users that liked a pin.
-router.get('/usersWhoLikedPin/:pinID', async (request, response) => {
-  const result = await complexService.getUsersWhoLikedPin(request.params.pinID);
+// Get list of users that liked a spin.
+router.get('/usersWhoLikedSpin/:spinID', async (request, response) => {
+  const result = await complexService.getCrawlersWhoLikedSpin(request.params.spinID);
   response.send(result);
 });
 
-// Get list of comments for a pin.
-router.get('/commentsForPin/:pinID', async (request, response) => {
-  const result = await complexService.getCommentsForPin(request.params.pinID);
+// Get list of comments for a spin.
+router.get('/commentsForSpin/:spinID', async (request, response) => {
+  const result = await complexService.getCommentsForSpin(request.params.spinID);
   response.send(result);
 });
 
-// Get unlimited list of pins for a board.
-router.get('/pinsForBoard/:boardID', async (request, response) => {
-  const result = await complexService.getPinsForBoard(request.params.boardID);
+// Get unlimited list of spins for a web.
+router.get('/spinsForWeb/:webID', async (request, response) => {
+  const result = await complexService.getSpinsForWeb(request.params.webID);
   response.send(result);
 });
 
-// Get limited list of pins for a board.
-router.get('/limitedPinsForBoard/:boardID', async (request, response) => {
-  const result = await complexService.getPinsForBoard(
-      request.params.boardID,
+// Get limited list of spins for a web.
+router.get('/limitedSpinsForWeb/:webID', async (request, response) => {
+  const result = await complexService.getSpinsForWeb(
+      request.params.webID,
       true
   );
   response.send(result);
 });
 
-// Get number list of pins for a board.
-router.get('/numberOfPinsInBoard/:boardID', async (request, response) => {
-  const result = await complexService.getNumberOfPinsInBoard(request.params.boardID);
+// Get number list of spins for a web.
+router.get('/numberOfSpinsInWeb/:webID', async (request, response) => {
+  const result = await complexService.getNumberOfSpinsInWeb(request.params.webID);
   response.send(result);
 });
 
-// Get list of boards for a user.
-router.get('/boardsForUser/:googleUserID', async (request, response) => {
-  const result = await complexService.getBoardsForUser(request.params.googleUserID);
+// Get list of webs for a user.
+router.get('/websForUser/:crawlerID', async (request, response) => {
+  const result = await complexService.getWebsForCrawler(request.params.crawlerID);
   response.send(result);
 });
 
 // Get Liked user feed
 router.get('/likedUserFeed', async (request, response) => {
-  const result = await complexService.getUserFeed(
-      request.body.googleUserID,
+  const result = await complexService.getCrawlerFeed(
+      request.body.crawlerID,
       true,
       request.body.offset,
       request.body.limit
@@ -65,8 +65,8 @@ router.get('/likedUserFeed', async (request, response) => {
 
 // Get Disliked user feed
 router.get('/dislikedUserFeed', async (request, response) => {
-  const result = await complexService.getUserFeed(
-      request.body.googleUserID,
+  const result = await complexService.getCrawlerFeed(
+      request.body.crawlerID,
       false,
       request.body.offset,
       request.body.limit

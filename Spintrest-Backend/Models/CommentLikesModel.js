@@ -3,8 +3,8 @@ const mapper = require('./ModelMapper');
 const mapCommentLikes = (commentLike) => {
     return {
         commentLikeID: commentLike.commentlikeid !== undefined ? commentLike.commentlikeid : commentLike.commentLikeID,
-        googleUserID: commentLike.googleuserid !== undefined ? commentLike.googleuserid : commentLike.googleUserID,
-        pinCommentID: commentLike.pincommentid !== undefined ? commentLike.pincommentid : commentLike.pinCommentID
+        crawlerID: commentLike.crawlerid !== undefined ? commentLike.crawlerid : commentLike.crawlerID,
+        spinCommentID: commentLike.spincommentid !== undefined ? commentLike.spincommentid : commentLike.spinCommentID
     }
 }
 
