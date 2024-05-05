@@ -1,44 +1,123 @@
+const errorHandler = require('../SQLErrorHandler');
 const complexRepository = require('../Repositories/ComplexRepository');
 
-const getCrawlersWhoLikedComment = async (spinCommentID) => {
-    return await complexRepository.getCrawlersWhoLikedComment(spinCommentID);
+const getCrawlersWhoLikedComment = async (response, spinCommentID) => {
+    if (
+        errorHandler.variableChecker(
+            response,
+            spinCommentID
+        )
+    ){
+        return await errorHandler.queryWrapper(
+            response,
+            complexRepository.getCrawlersWhoLikedComment,
+            spinCommentID
+        );
+
+    }
 }
 
-const getCrawlersWhoLikedSpin = async (spinID) => {
-    return await complexRepository.getCrawlersWhoLikedSpin(spinID);
+const getCrawlersWhoLikedSpin = async (response, spinID) => {
+    if (
+        errorHandler.variableChecker(
+            response,
+            spinID
+        )
+    ){
+        return await errorHandler.queryWrapper(
+            response,
+            complexRepository.getCrawlersWhoLikedSpin,
+            spinID
+        );
+    }
 }
 
-const getCommentsForSpin = async (spinID) => {
-    return await complexRepository.getCommentsForSpin(spinID);
+const getCommentsForSpin = async (response, spinID) => {
+    if (
+        errorHandler.variableChecker(
+            response,
+            spinID
+        )
+    ){
+        return await errorHandler.queryWrapper(
+            response,
+            complexRepository.getCommentsForSpin,
+            spinID
+        );
+    }
 }
 
-const getSpinsForWeb = async (
+const getSpinsForWeb = async (response, 
     webID,
     isLimited = false
 ) => {
-    return await complexRepository.getSpinsForWeb(webID, isLimited);
+    if (
+        errorHandler.variableChecker(
+            response,
+            webID
+        )
+    ){
+        return await errorHandler.queryWrapper(
+            response,
+            complexRepository.getSpinsForWeb,
+            webID,
+            isLimited
+        );
+    }
 }
 
-const getNumberOfSpinsInWeb = async (webID) => {
-    return await complexRepository.getNumberOfSpinsInWeb(webID);
+const getNumberOfSpinsInWeb = async (response, webID) => {
+    if (
+        errorHandler.variableChecker(
+            response,
+            webID
+        )
+    ){
+        return await errorHandler.queryWrapper(
+            response,
+            complexRepository.getNumberOfSpinsInWeb,
+            webID
+        );
+    }
 }
 
-const getWebsForCrawler = async (crawlerID) => {
-    return await complexRepository.getWebsForCrawler(crawlerID);
+const getWebsForCrawler = async (response, crawlerID) => {
+    if (
+        errorHandler.variableChecker(
+            response,
+            crawlerID
+        )
+    ){
+        return await errorHandler.queryWrapper(
+            response,
+            complexRepository.getWebsForCrawler,
+            crawlerID
+        );
+    }
 }
 
-const getCrawlerFeed = async (
+const getCrawlerFeed = async (response, 
     crawlerID,
     isLikedTags,
     offset,
     limit
 ) => {
-    return await complexRepository.getCrawlerFeed(
-        crawlerID,
-        isLikedTags,
-        offset || 0,
-        limit || 100
-    );
+    if (
+        errorHandler.variableChecker(
+            response,
+            crawlerID,
+            isLikedTags
+        )
+    ){
+        return await errorHandler.queryWrapper(
+            response,
+            complexRepository.getCrawlerFeed,
+            crawlerID,
+            isLikedTags,
+            offset || 0,
+            limit || 100
+        );
+    }
 };
 
 module.exports = {

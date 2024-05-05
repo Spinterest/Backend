@@ -7,10 +7,10 @@ const getUserWithID = async (
 ) => {
     const result = await databaseContext.query(
         `select * 
-        from Crawler 
-        where 
-            crawlerID = ${crawlerID} and
-            crawlerIsDeleted = ${crawlerIsDeleted};`
+    from Crawler 
+    where 
+        crawlerID = ${crawlerID} and
+        crawlerIsDeleted = ${crawlerIsDeleted};`
     );
     return crawlerModel(result.rows);
 };
@@ -30,7 +30,7 @@ const getUserWithEmail = async (
 };
 
 const addUserWithEmail = async (crawlerEmail) => {
-    const crawlerUserName = crawlerEmail.split('@')[0];
+    const crawlerUserName = crawlerEmail?.split('@')[0] || crawlerEmail;
     return await databaseContext.query(
         `insert into 
         Crawler (crawlerEmail, crawlerUserName) 

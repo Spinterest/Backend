@@ -1,15 +1,49 @@
+const errorHandler = require('../SQLErrorHandler');
 const tagRepository = require('../Repositories/TagRepository');
 
-const getTagByName = async (tagName) => {
-    return await tagRepository.getTagByName(tagName);
+const getTagByName = async (response, tagName) => {
+    if (
+        errorHandler.variableChecker(
+            response,
+            tagName
+        )
+    ){
+        return await errorHandler.queryWrapper(
+            response,
+            tagRepository.getTagByName,
+            tagName
+        );
+    }
 }
 
-const addTag = async (tagName) => {
-    return await tagRepository.addTag(tagName);
+const addTag = async (response, tagName) => {
+    if (
+        errorHandler.variableChecker(
+            response,
+            tagName
+        )
+    ){
+        return await errorHandler.queryWrapper(
+            response,
+            tagRepository.addTag,
+            tagName
+        );
+    }
 }
 
-const filterTags = async (tagName) => {
-    return await tagRepository.filterTags(tagName);
+const filterTags = async (response, tagName) => {
+    if (
+        errorHandler.variableChecker(
+            response,
+            tagName
+        )
+    ){
+        return await errorHandler.queryWrapper(
+            response,
+            tagRepository.filterTags,
+            tagName
+        );
+    }
 }
 
 module.exports = {

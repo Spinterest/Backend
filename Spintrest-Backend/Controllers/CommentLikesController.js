@@ -9,13 +9,13 @@ router.get('/', (request, response) => {
 
 // Like Spin
 router.post('/commentLike', async (request, response) => {
-  const result = await commentLikesService.likeComment(request.body);
+  const result = await commentLikesService.likeComment(response, request.body);
   response.send(result);
 });
 
 // Remove Like from Spin
 router.delete('/commentLike', async (request, response) => {
-  const result = await commentLikesService.removeLikeFromComment(request.body);
+  const result = await commentLikesService.removeLikeFromComment(response, request.body);
   response.send(result);
 });
 
