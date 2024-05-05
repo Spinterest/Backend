@@ -60,12 +60,12 @@ do $$
 	begin
 		-- Adding users
 		insert into 
-			Crawler (crawlerEmail, crawlerUserName) 
+			Crawler (crawlerID, crawlerEmail, crawlerUserName) 
 		values 
-			('abdul.osman@bbd.co.za', 'abdul'),
-			('cameron.zwane@bbd.co.za', 'cameron'),
-			('katlego.kungoane@bbd.co.za', 'katlego'),
-			('rotenda.mantsha@bbd.co.za', 'rotenda');
+			(1, 'abdul.osman@bbd.co.za', 'abdul'),
+			(2, 'cameron.zwane@bbd.co.za', 'cameron'),
+			(3, 'katlego.kungoane@bbd.co.za', 'katlego'),
+			(4, 'rotenda.mantsha@bbd.co.za', 'rotenda');
 
 
 		-- Getting user IDs
@@ -76,26 +76,26 @@ do $$
 
 		-- Adding pins, you can get from imgur.
 		insert into 
-			Spin (crawlerID, spinLink) 
+			Spin (spinID, crawlerID, spinLink) 
 		values
-			(rotendaUserID, 'https://i.imgur.com/inWNK04.jpg'),
-			(rotendaUserID, 'https://i.imgur.com/nsLnAmo.jpg'),
-			(rotendaUserID, 'https://i.imgur.com/V1Qvsjp.jpg'),
-			(cameronUserID, 'https://i.imgur.com/zQDlAl2.jpg'),
-			(cameronUserID, 'https://i.imgur.com/YYZ2wGL.jpg'),
-			(cameronUserID, 'https://i.imgur.com/uUtzbjT.jpg'),
-			(cameronUserID, 'https://i.imgur.com/ZGkslVN.jpg'),
-			(cameronUserID, 'https://i.imgur.com/mIbkYY3.jpg'),
-			(katlegoUserID, 'https://i.imgur.com/0xeeupu.jpg'),
-			(katlegoUserID, 'https://i.imgur.com/lzD8xlY.jpg'),
-			(katlegoUserID, 'https://i.imgur.com/hmmcp6t.jpg'),
-			(katlegoUserID, 'https://i.imgur.com/H18fW4x.jpg'),
-			(katlegoUserID, 'https://i.imgur.com/9aSvg5U.jpg'),
-			(abdulUserID, 'https://i.imgur.com/oyruWKE.jpg'),
-			(abdulUserID, 'https://i.imgur.com/9xOOY3k.jpg'),
-			(abdulUserID, 'https://i.imgur.com/oubQukK.jpg'),
-			(abdulUserID, 'https://i.imgur.com/faautEE.jpg'),
-			(abdulUserID, 'https://i.imgur.com/NMGnMU2.jpg');
+			(1, rotendaUserID, 'https://i.imgur.com/inWNK04.jpg'),
+			(2, rotendaUserID, 'https://i.imgur.com/nsLnAmo.jpg'),
+			(3, rotendaUserID, 'https://i.imgur.com/V1Qvsjp.jpg'),
+			(4, cameronUserID, 'https://i.imgur.com/zQDlAl2.jpg'),
+			(5, cameronUserID, 'https://i.imgur.com/YYZ2wGL.jpg'),
+			(6, cameronUserID, 'https://i.imgur.com/uUtzbjT.jpg'),
+			(7, cameronUserID, 'https://i.imgur.com/ZGkslVN.jpg'),
+			(8, cameronUserID, 'https://i.imgur.com/mIbkYY3.jpg'),
+			(9, katlegoUserID, 'https://i.imgur.com/0xeeupu.jpg'),
+			(10, katlegoUserID, 'https://i.imgur.com/lzD8xlY.jpg'),
+			(11, katlegoUserID, 'https://i.imgur.com/hmmcp6t.jpg'),
+			(12, katlegoUserID, 'https://i.imgur.com/H18fW4x.jpg'),
+			(13, katlegoUserID, 'https://i.imgur.com/9aSvg5U.jpg'),
+			(14, abdulUserID, 'https://i.imgur.com/oyruWKE.jpg'),
+			(15, abdulUserID, 'https://i.imgur.com/9xOOY3k.jpg'),
+			(16, abdulUserID, 'https://i.imgur.com/oubQukK.jpg'),
+			(17, abdulUserID, 'https://i.imgur.com/faautEE.jpg'),
+			(18, abdulUserID, 'https://i.imgur.com/NMGnMU2.jpg');
 
 		-- Getting pinIDs
 		select spinID into greenSnakeID from Spin where spinLink = 'https://i.imgur.com/9xOOY3k.jpg';
@@ -113,12 +113,12 @@ do $$
 
 		-- Creating Boards
 		insert into 
-			Web (crawlerID, webTitle) 
+			Web (webID, crawlerID, webTitle) 
 		values 
-			(rotendaUserID, 'Venomous'),
-			(katlegoUserID, 'Carnivore'),
-			(cameronUserID, 'Vegetarian'),
-			(abdulUserID, 'Arially Inclidened');
+			(1, rotendaUserID, 'Venomous'),
+			(2, katlegoUserID, 'Carnivore'),
+			(3, cameronUserID, 'Vegetarian'),
+			(4, abdulUserID, 'Arially Inclidened');
 
 		-- Getting webIDs
 		select webID into venomouswebID from Web where webTitle = 'Venomous';
@@ -128,29 +128,29 @@ do $$
 
 		-- Adding pins to boards
 		insert into 
-			WebSpins (webID, spinID) 
+			WebSpins (webSpinID, webID, spinID) 
 		values 
-			(venomouswebID, blackWidowID),
-			(venomouswebID, greenSnakeID),
-			(carnivorewebID, crocodileID),
-			(carnivorewebID, flamingoID),
-			(vegetarianwebID, hedgehogID),
-			(vegetarianwebID, peakokID),
-			(aveswebID, greenBirdID),
-			(aveswebID, whiteOwlID);
+			(1, venomouswebID, blackWidowID),
+			(2, venomouswebID, greenSnakeID),
+			(3, carnivorewebID, crocodileID),
+			(4, carnivorewebID, flamingoID),
+			(5, vegetarianwebID, hedgehogID),
+			(6, vegetarianwebID, peakokID),
+			(7, aveswebID, greenBirdID),
+			(8, aveswebID, whiteOwlID);
 
 		-- Creating Tags
 		insert into 
-			Tag (tagName) 
+			Tag (tagID, tagName) 
 		values 
-			('animal'),
-			('mammal'),
-			('amphibian'),
-			('insecta'),
-			('aves'),
-			('reptile'),
-			('carnivore'),
-			('vegetarian');
+			(1, 'animal'),
+			(2, 'mammal'),
+			(3, 'amphibian'),
+			(4, 'insecta'),
+			(5, 'aves'),
+			(6, 'reptile'),
+			(7, 'carnivore'),
+			(8, 'vegetarian');
 
 		-- Getting tagIDs
 		select tagID into animalTagID from Tag where tagName = 'animal';
@@ -164,65 +164,65 @@ do $$
 
 		-- Adding SpinTags
 		insert into 
-			SpinTags (spinID, tagID) 
+			SpinTags (spinTagID, spinID, tagID) 
 		values
-			(elephantID, animalTagID),
-			(elephantID, mammalTagID),
-			(elephantID, vegetarianTagID),
-			(slothID, animalTagID),
-			(slothID, mammalTagID),
-			(slothID, vegetarianTagID),
-			(greenFrogID, animalTagID),
-			(greenFrogID, amphibianTagID),
-			(greenFrogID, vegetarianTagID),
-			(redFrogID, animalTagID),
-			(redFrogID, amphibianTagID),
-			(redFrogID, carnivoreTagID),
-			(blackWidowID, animalTagID),
-			(blackWidowID, insectaTagID),
-			(blackWidowID, carnivoreTagID),
-			(flamingoID, animalTagID),
-			(flamingoID, avesTagID),
-			(flamingoID, carnivoreTagID),
-			(greenBirdID, animalTagID),
-			(greenBirdID, avesTagID),
-			(greenBirdID, vegetarianTagID),
-			(crocodileID, animalTagID),
-			(crocodileID, reptileTagID),
-			(crocodileID, carnivoreTagID),
-			(greenSnakeID, animalTagID),
-			(greenSnakeID, reptileTagID),
-			(greenSnakeID, carnivoreTagID);
+			(1, elephantID, animalTagID),
+			(2, elephantID, mammalTagID),
+			(3, elephantID, vegetarianTagID),
+			(4, slothID, animalTagID),
+			(5, slothID, mammalTagID),
+			(6, slothID, vegetarianTagID),
+			(7, greenFrogID, animalTagID),
+			(8, greenFrogID, amphibianTagID),
+			(9, greenFrogID, vegetarianTagID),
+			(10, redFrogID, animalTagID),
+			(11, redFrogID, amphibianTagID),
+			(12, redFrogID, carnivoreTagID),
+			(13, blackWidowID, animalTagID),
+			(14, blackWidowID, insectaTagID),
+			(15, blackWidowID, carnivoreTagID),
+			(16, flamingoID, animalTagID),
+			(17, flamingoID, avesTagID),
+			(18, flamingoID, carnivoreTagID),
+			(19, greenBirdID, animalTagID),
+			(20, greenBirdID, avesTagID),
+			(21, greenBirdID, vegetarianTagID),
+			(22, crocodileID, animalTagID),
+			(23, crocodileID, reptileTagID),
+			(24, crocodileID, carnivoreTagID),
+			(25, greenSnakeID, animalTagID),
+			(26, greenSnakeID, reptileTagID),
+			(27, greenSnakeID, carnivoreTagID);
 
 		-- Adding Spin Likes
 		insert into 
-			SpinLikes (crawlerID, spinID) 
+			SpinLikes (spinLikeID, crawlerID, spinID) 
 		values
-			(katlegoUserID, flamingoID),
-			(cameronUserID, flamingoID),
-			(rotendaUserID, flamingoID),
-			(abdulUserID, flamingoID),
-			(cameronUserID, crocodileID),
-			(rotendaUserID, crocodileID),
-			(abdulUserID, crocodileID),
-			(rotendaUserID, greenSnakeID),
-			(abdulUserID, greenSnakeID),
-			(abdulUserID, blackWidowID);
+			(1, katlegoUserID, flamingoID),
+			(2, cameronUserID, flamingoID),
+			(3, rotendaUserID, flamingoID),
+			(4, abdulUserID, flamingoID),
+			(5, cameronUserID, crocodileID),
+			(6, rotendaUserID, crocodileID),
+			(7, abdulUserID, crocodileID),
+			(8, rotendaUserID, greenSnakeID),
+			(9, abdulUserID, greenSnakeID),
+			(10, abdulUserID, blackWidowID);
 
 		-- Adding Spin Comments
 		insert into 
-			SpinComment (crawlerID, spinID, spinCommentMessage) 
+			SpinComment (spinCommentID, crawlerID, spinID, spinCommentMessage) 
 		values 
-			(katlegoUserID, flamingoID, 'First Comment'),
-			(cameronUserID, flamingoID, 'This is a cool flamingo'),
-			(rotendaUserID, flamingoID, 'Who said this was a carnivore!?'),
-			(abdulUserID, flamingoID, 'How do I go back to the home page?'),
-			(cameronUserID, crocodileID, 'What a cute little river pupper'),
-			(rotendaUserID, crocodileID, '@Cameron, you are buggin! THATS NO PUPPER'),
-			(abdulUserID, crocodileID, 'Guys... I forgot... Home page, please :('),
-			(rotendaUserID, greenSnakeID, 'We dont get many of these in South Africa'),
-			(abdulUserID, greenSnakeID, 'FOUND THE HOME PAGE'),
-			(abdulUserID, blackWidowID, 'If I find you in my house!? Its just your house');
+			(1, katlegoUserID, flamingoID, 'First Comment'),
+			(2, cameronUserID, flamingoID, 'This is a cool flamingo'),
+			(3, rotendaUserID, flamingoID, 'Who said this was a carnivore!?'),
+			(4, abdulUserID, flamingoID, 'How do I go back to the home page?'),
+			(5, cameronUserID, crocodileID, 'What a cute little river pupper'),
+			(6, rotendaUserID, crocodileID, '@Cameron, you are buggin! THATS NO PUPPER'),
+			(7, abdulUserID, crocodileID, 'Guys... I forgot... Home page, please :('),
+			(8, rotendaUserID, greenSnakeID, 'We dont get many of these in South Africa'),
+			(9, abdulUserID, greenSnakeID, 'FOUND THE HOME PAGE'),
+			(10, abdulUserID, blackWidowID, 'If I find you in my house!? Its just your house');
 
 		-- Getting comment IDs
 		select spinCommentID into katlegoFlamingoCommentID from SpinComment where spinCommentMessage = 'First Comment';
@@ -238,13 +238,13 @@ do $$
 
 		-- Adding Comment likes
 		insert into 
-			CommentLikes (spinCommentID, crawlerID) 
+			CommentLikes (commentLikeID, spinCommentID, crawlerID) 
 		values 
-			(katlegoFlamingoCommentID, katlegoUserID),
-			(katlegoFlamingoCommentID, cameronUserID),
-			(katlegoFlamingoCommentID, rotendaUserID),
-			(katlegoFlamingoCommentID, abdulUserID),
-			(rotendaFlamingoCommentID, katlegoUserID),
-			(rotendaFlamingoCommentID, cameronUserID);
+			(1, katlegoFlamingoCommentID, katlegoUserID),
+			(2, katlegoFlamingoCommentID, cameronUserID),
+			(3, katlegoFlamingoCommentID, rotendaUserID),
+			(4, katlegoFlamingoCommentID, abdulUserID),
+			(5, rotendaFlamingoCommentID, katlegoUserID),
+			(6, rotendaFlamingoCommentID, cameronUserID);
 	end;
 $$;

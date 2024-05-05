@@ -1,3 +1,6 @@
+drop trigger if exists tag_lowercase_trigger on Tag;
+drop function if exists lowercaseTrigger();
+
 CREATE OR REPLACE FUNCTION lowercaseTrigger()
 RETURNS TRIGGER AS $$
 BEGIN

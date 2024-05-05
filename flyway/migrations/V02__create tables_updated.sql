@@ -2,7 +2,6 @@
 drop table if exists CommentLikes;
 drop table if exists PinLikes;
 drop table if exists PinTags;
-drop table if exists Tag;
 drop table if exists BoardPins;
 drop table if exists PinComment;
 drop table if exists Board;
