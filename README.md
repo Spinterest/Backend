@@ -1,6 +1,9 @@
 # Backend
 API and Database
 
+## Local Run
+comment out the ssl thing in `Spintrest-Backend/Data/dataContext.js`
+
 # Environment Variables
 Make a `.env` file in the root directory with the necessary variables. This wont be pushed up onto GitHub, so make sure to have it set up on your side.  
 An example of what my local one looks like:
