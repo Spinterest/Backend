@@ -3,7 +3,7 @@ drop function if exists getCrawlerLikedTags(int);
 
 create or replace 
 	function getCrawlerLikedTags(paramGoogleUserID int)
-returns table (tagname)
+returns table (tagname varchar(50))
 as $$
 begin
 	return query select

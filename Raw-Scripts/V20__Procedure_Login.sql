@@ -1,1 +1,0 @@
-drop procedure procedurelogin(character varying);
