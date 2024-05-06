@@ -63,36 +63,86 @@ const deleteUserWithEmail = async (response, crawler) => {
     }
 };
 
-const editCrawlerNameWithID = async (response, crawler) => {
+const editCrawlerNameWithID = async (response, newCrawler) => {
     if (
         errorHandler.jsonChecker(
             response,
-            crawler,
+            newCrawler,
             ['crawlerID', 'crawlerUserName']
         )
     ){
+        await errorHandler.queryWrapper(
+            response,
+            crawlerRepository.getUserWithID,
+            newCrawler.crawlerID
+        );
+
+        if (response.statusCode === 500){
+            return errorHandler.throwAlert(`No crawler is registered with that ID`);
+        }
+
+        const userNameCount = await errorHandler.queryWrapper(
+            response,
+            crawlerRepository.isUsernameAvailable,
+            newCrawler.crawlerUserName
+        );
+
+        if (response.statusCode === 500){
+            // No reason for this one.
+            return;
+        }
+
+        if (userNameCount.count !== "0"){
+            return errorHandler.throwAlert(`Username: ${newCrawler.crawlerUserName}, is in use.`);
+        }
+
         return await errorHandler.queryWrapper(
             response,
             crawlerRepository.editCrawlerNameWithID,
-            crawler.crawlerID,
-            crawler.crawlerUserName
+            newCrawler.crawlerID,
+            newCrawler.crawlerUserName
         );
     }
 };
 
-const editCrawlerNameWithEmail = async (response, crawler) => {
+const editCrawlerNameWithEmail = async (response, newCrawler) => {
     if (
         errorHandler.jsonChecker(
             response,
-            crawler,
+            newCrawler,
             ['crawlerEmail', 'crawlerUserName']
         )
     ){
+        const crawler = await errorHandler.queryWrapper(
+            response,
+            crawlerRepository.getUserWithEmail,
+            newCrawler.crawlerEmail
+        );
+
+        if (response.statusCode === 500){
+            return errorHandler.throwAlert(`No crawler is registered with email: ${crawler.crawlerEmail}`);
+        }
+
+        const userNameCount = await errorHandler.queryWrapper(
+            response,
+            crawlerRepository.isUsernameAvailable,
+            newCrawler.crawlerUserName
+        );
+
+        if (response.statusCode === 500){
+            // No reason for this one.
+            return;
+        }
+
+        if (userNameCount.count !== "0"){
+            return errorHandler.throwAlert(`Username: ${newCrawler.crawlerUserName}, is in use.`);
+        }
+
         return await errorHandler.queryWrapper(
             response,
             crawlerRepository.editCrawlerNameWithEmail,
-            crawler.crawlerEmail,
-            crawler.crawlerUserName
+            newCrawler.crawlerEmail,
+            newCrawler.crawlerUserName
         );
     }
 };
