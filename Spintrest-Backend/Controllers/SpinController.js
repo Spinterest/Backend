@@ -15,12 +15,12 @@ router.get('/spinID/:spinID', async (request, response) => {
 
 // Delete Spin with ID
 router.put('/spinID', async (request, response) => {
-    const result = await spinService.deleteSpinWithID(response, request.body.spinID);
+    const result = await spinService.deleteSpinWithID(response, request.body);
     response.send(result);
 });
 
 // Create Spin
-router.post('/', async (request, response) => {
+router.post('/createSpin', async (request, response) => {
     const result = await spinService.createSpin(response, request.body);
     response.send(result);
 });
@@ -39,13 +39,13 @@ router.get('/crawlerEmail/:crawlerEmail', async (request, response) => {
 
 // Delete a User's Spins With crawlerID
 router.put('/crawlerID', async (request, response) => {
-    const result = await spinService.deleteUserSpinsWithUserID(response, request.body.crawlerID);
+    const result = await spinService.deleteUserSpinsWithUserID(response, request.body);
     response.send(result);
 });
 
 // Delete a User's Spins With crawlerEmail
 router.put('/crawlerEmail', async (request, response) => {
-    const result = await spinService.deleteUserSpinsWithUserEmail(response, request.body.crawlerEmail);
+    const result = await spinService.deleteUserSpinsWithUserEmail(response, request.body);
     response.send(result);
 });
 

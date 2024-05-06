@@ -16,17 +16,18 @@ const getWebWithID = async (response, spinID) => {
     }
 };
 
-const deleteWebWithID = async (response, spinID) => {
+const deleteWebWithID = async (response, web) => {
     if (
-        errorHandler.variableChecker(
+        errorHandler.jsonChecker(
             response,
-            spinID
+            web,
+            ['webID']
         )
     ){
         return await errorHandler.queryWrapper(
             response,
             webRepository.deleteWebWithID,
-            spinID
+            web.webID
         );
     }
 };
@@ -61,32 +62,34 @@ const getUserWebsWithUserEmail = async (response, crawlerEmail) => {
     }
 };
 
-const deleteUserWebsWithUserID = async (response, crawlerID) => {
+const deleteUserWebsWithUserID = async (response, crawler) => {
     if (
-        errorHandler.variableChecker(
+        errorHandler.jsonChecker(
             response,
-            crawlerID
+            crawler,
+            ['crawlerID']
         )
     ){
         return await errorHandler.queryWrapper(
             response,
             webRepository.deleteUserWebsWithUserID,
-            crawlerID
+            crawler.crawlerID
         );
     }
 };
 
-const deleteUserWebsWithUserEmail = async (response, crawlerEmail) => {
+const deleteUserWebsWithUserEmail = async (response, crawler) => {
     if (
         errorHandler.variableChecker(
             response,
-            crawlerEmail
+            crawler.crawlerEmail,
+            ['crawlerEmail']
         )
     ){
         return await errorHandler.queryWrapper(
             response,
             webRepository.deleteUserWebsWithUserEmail,
-            crawlerEmail
+            crawler.crawlerEmail
         );
     }
 };

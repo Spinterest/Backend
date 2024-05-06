@@ -8,13 +8,13 @@ router.get('/', (request, response) => {
 });
 
 // Create Web Spin
-router.post('/', async (request, response) => {
+router.post('/createWebSpin', async (request, response) => {
   const result = await webSpinsService.addSpinToWeb(response, request.body);
   response.send(result);
 });
 
 // Delete Web Spin
-router.delete('/', async (request, response) => {
+router.delete('/deleteWebSpin', async (request, response) => {
   const result = await webSpinsService.removeSpinFromWeb(response, request.body);
   response.send(result);
 });

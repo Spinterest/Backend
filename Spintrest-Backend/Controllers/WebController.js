@@ -14,12 +14,12 @@ router.get('/webID/:webID', async (request, response) => {
 
 // Delete Web with ID
 router.put('/webID', async (request, response) => {
-  const result = await webService.deleteWebWithID(response, request.body.webID);
+  const result = await webService.deleteWebWithID(response, request.body);
   response.send(result);
 });
 
 // Create Web
-router.post('/', async (request, response) => {
+router.post('/createWeb', async (request, response) => {
   const result = await webService.createWeb(response, request.body);
   response.send(result);
 });
@@ -38,13 +38,13 @@ router.get('/crawlerEmail/:crawlerEmail', async (request, response) => {
 
 // Delete a User's Webs With crawlerID
 router.put('/crawlerID', async (request, response) => {
-  const result = await webService.deleteUserWebsWithUserID(response, request.body.crawlerID);
+  const result = await webService.deleteUserWebsWithUserID(response, request.body);
   response.send(result);
 });
 
 // Delete a User's Webs With crawlerEmail
 router.put('/crawlerEmail', async (request, response) => {
-  const result = await webService.deleteUserWebsWithUserEmail(response, request.body.crawlerEmail);
+  const result = await webService.deleteUserWebsWithUserEmail(response, request.body);
   response.send(result);
 });
 

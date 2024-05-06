@@ -14,8 +14,8 @@ router.get('/tagName/:tagName', async (request, response) => {
 });
 
 // Create Tag
-router.post('/', async (request, response) => {
-  const result = await tagService.addTag(response, request.body.tagName);
+router.post('/createTag', async (request, response) => {
+  const result = await tagService.addTag(response, request.body);
   response.send(result);
 });
 

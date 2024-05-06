@@ -31,32 +31,34 @@ const getUserWithEmail = async (response, crawlerEmail) => {
     }
 };
 
-const deleteUserWithID = async (response, crawlerID) => {
+const deleteUserWithID = async (response, crawler) => {
     if (
-        errorHandler.variableChecker(
+        errorHandler.jsonChecker(
             response,
-            crawlerID
+            crawler,
+            ['crawlerID']
         )
     ){
         return await errorHandler.queryWrapper(
             response,
             crawlerRepository.deleteUserWithID,
-            crawlerID
+            crawler.crawlerID
         );
     }
 };
 
-const deleteUserWithEmail = async (response, crawlerEmail) => {
+const deleteUserWithEmail = async (response, crawler) => {
     if (
-        errorHandler.variableChecker(
+        errorHandler.jsonChecker(
             response,
-            crawlerEmail
+            crawler,
+            ['crawlerEmail']
         )
     ){
         return await errorHandler.queryWrapper(
             response,
             crawlerRepository.deleteUserWithEmail,
-            crawlerEmail
+            crawler.crawlerEmail
         );
     }
 };
@@ -95,17 +97,18 @@ const editCrawlerNameWithEmail = async (response, crawler) => {
     }
 };
 
-const login = async (response, crawlerEmail) => {
+const login = async (response, crawler) => {
     if (
-        errorHandler.variableChecker(
+        errorHandler.jsonChecker(
             response,
-            crawlerEmail
+            crawler,
+            ['crawlerEmail']
         )
     ){
-        let crawler = await errorHandler.queryWrapper(
+        let newCrawler = await errorHandler.queryWrapper(
             response,
             crawlerRepository.getUserWithEmail,
-            crawlerEmail
+            crawler.crawlerEmail
         );
 
         // stop early if there was an issue with the query
@@ -113,20 +116,20 @@ const login = async (response, crawlerEmail) => {
             return;
         }
 
-        if (!crawler) {
+        if (!newCrawler) {
             // We are checking again to see if they exist but their account is deleted
-            crawler = await crawlerRepository.getUserWithEmail(crawlerEmail, true);
-            if (crawler) {
-                await crawlerRepository.restoreUserWithEmail(crawlerEmail);
+            newCrawler = await crawlerRepository.getUserWithEmail(crawler.crawlerEmail, true);
+            if (newCrawler) {
+                await crawlerRepository.restoreUserWithEmail(crawler.crawlerEmail);
             }
             else {
-                await crawlerRepository.addUserWithEmail(crawlerEmail);
+                await crawlerRepository.addUserWithEmail(crawler.crawlerEmail);
             }
 
-            crawler = await crawlerRepository.getUserWithEmail(crawlerEmail);
+            newCrawler = await crawlerRepository.getUserWithEmail(crawler.crawlerEmail);
         }
 
-        return crawler;
+        return newCrawler;
     }
 }
 

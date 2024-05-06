@@ -10,7 +10,10 @@ const commentLikes = require('./Controllers/CommentLikesController');
 const complexCalls = require('./Controllers/ComplexController');
 
 const express = require("express");
+const cors = require('cors');
 const app = express();
+
+app.use(cors());
 
 // This allows us to read the request body as JSON
 app.use(express.json());
@@ -18,7 +21,6 @@ app.use(express.json());
 app.get('/', function(req, res){
     res.send("Hello world!");
  });
-
 
 app.use('/crawlers', crawlers);
 app.use('/webs', webs);
