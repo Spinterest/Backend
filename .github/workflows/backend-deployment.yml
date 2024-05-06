@@ -3,7 +3,9 @@ name: Deploy New App Version (Backend)
 on:
   push:
     branches:
-    - main
+      - main
+    paths:
+      - 'Spintrest-Backend/**' # Adjust this path as needed
   workflow_dispatch:
 
 permissions:
@@ -32,16 +34,15 @@ jobs:
           echo "DB_PASSWORD_LOCAL:${{secrets.DB_PASSWORD }}" >> .env
           echo "DB_DATABASE_LOCAL:spinterestdb" >> .env
           echo "DB_PORT_LOCAL:${{secrets.DB_PORT}}" >> .env
-        working-directory: Spinterest-Backend
+        working-directory: Spintrest-Backend
 
       - name: Package artifact
         run: zip -r ../spinterest.zip *
-        working-directory: Spinterest-Backend
+        working-directory: Spintrest-Backend
 
       - name: Upload artifact to S3
-        run: aws s3 cp sinterest.zip s3://${{ secrets.BUCKET_NAME }}/application-${{ github.run_id }}.zip
-        working-directory: Spinterest-Backend
-
+        run: aws s3 cp spinterest.zip s3://${{ secrets.BUCKET_NAME }}/application-${{ github.run_id }}.zip
+        working-directory: Spintrest-Backend
 
   deploy:
     runs-on: ubuntu-latest
