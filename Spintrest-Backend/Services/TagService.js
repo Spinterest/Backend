@@ -16,17 +16,18 @@ const getTagByName = async (response, tagName) => {
     }
 }
 
-const addTag = async (response, tagName) => {
+const addTag = async (response, tag) => {
     if (
-        errorHandler.variableChecker(
+        errorHandler.jsonChecker(
             response,
-            tagName
+            tag,
+            ['tagName']
         )
     ){
         return await errorHandler.queryWrapper(
             response,
             tagRepository.addTag,
-            tagName
+            tag.tagName
         );
     }
 }

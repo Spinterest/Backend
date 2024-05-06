@@ -27,20 +27,6 @@ const getSpinCommentWithID = async (spinCommentID) => {
     return spinCommentModel(result.rows);
 };
 
-const getCommentsForSpinWithSpinID = async (
-    spinID,
-    spinCommentIsDeleted = false
-) => {
-    const result = await databaseContext.query(
-        `select * 
-        from SpinComment 
-        where 
-            spinID = ${spinID} and
-            spinCommentIsDeleted = ${spinCommentIsDeleted}`
-    );
-    return spinCommentModel(result.rows);
-};
-
 const deleteSpinCommentWithID = async (spinCommentID) => {
     return await databaseContext.query(
         `update SpinComment
@@ -52,6 +38,5 @@ const deleteSpinCommentWithID = async (spinCommentID) => {
 module.exports = {
     makeCommentToSpin,
     getSpinCommentWithID,
-    getCommentsForSpinWithSpinID,
     deleteSpinCommentWithID
 };

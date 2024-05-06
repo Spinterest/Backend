@@ -32,32 +32,18 @@ const getSpinCommentWithID = async (response, spinCommentID) => {
     }
 };
 
-const getCommentsForSpinWithSpinID = async (response, spinID) => {
+const deleteSpinCommentWithID = async (response, spinComment) => {
     if (
-        errorHandler.variableChecker(
+        errorHandler.jsonChecker(
             response,
-            spinID
-        )
-    ){
-        return await errorHandler.queryWrapper(
-            response,
-            spinCommentRepository.getCommentsForSpinWithSpinID,
-            spinID
-        );
-    }
-};
-
-const deleteSpinCommentWithID = async (response, spinCommentID) => {
-    if (
-        errorHandler.variableChecker(
-            response,
-            spinCommentID
+            spinComment,
+            ['spinCommentID']
         )
     ){
         return await errorHandler.queryWrapper(
             response,
             spinCommentRepository.deleteSpinCommentWithID,
-            spinCommentID
+            spinComment.spinCommentID
         );
     }
 };
@@ -65,6 +51,5 @@ const deleteSpinCommentWithID = async (response, spinCommentID) => {
 module.exports = {
     makeCommentToSpin,
     getSpinCommentWithID,
-    getCommentsForSpinWithSpinID,
     deleteSpinCommentWithID
 };

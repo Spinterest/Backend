@@ -12,15 +12,9 @@ router.get('/spinCommentID/:spinCommentID', async (request, response) => {
   response.send(result);
 });
 
-// Get SpinComments for Spin With spinID
-router.get('/spinID/:spinID', async (request, response) => {
-  const result = await spinCommentService.getSpinCommentWithID(response, request.params.spinID)
-  response.send(result);
-});
-
 // Delete SpinComment with spinCommentID
 router.put('/spinCommentID', async (request, response) => {
-  const result = await spinCommentService.deleteSpinCommentWithID(response, request.body.spinCommentID);
+  const result = await spinCommentService.deleteSpinCommentWithID(response, request.body);
   response.send(result);
 });
 

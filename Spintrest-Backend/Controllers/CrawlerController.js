@@ -21,19 +21,19 @@ router.get('/crawlerEmail/:crawlerEmail', async (request, response) => {
 
 // Add user with crawlerEmail
 router.post('/login', async (request, response) => {
-    const result = await crawlerService.login(response, request.body.crawlerEmail);
+    const result = await crawlerService.login(response, request.body);
     response.send(result);
 });
 
 // Delete a user using crawlerEmail
 router.put('/crawlerEmail', async (request, response) => {
-    const result = await crawlerService.deleteUserWithEmail(response, request.body.crawlerEmail);
+    const result = await crawlerService.deleteUserWithEmail(response, request.body);
     response.send(result);
 });
 
 // Delete a user using crawlerID
 router.put('/crawlerID', async (request, response) => {
-    const result = await crawlerService.deleteUserWithID(response, request.body.crawlerID);
+    const result = await crawlerService.deleteUserWithID(response, request.body);
     response.send(result);
 });
 

@@ -8,13 +8,13 @@ router.get('/', (request, response) => {
 });
 
 // Create SpinTag
-router.post('/', async (request, response) => {
+router.post('/spinTag', async (request, response) => {
   const result = await spinTagsService.addTagToSpin(response, request.body);
   response.send(result);
 });
 
 // Delete SpinTag
-router.delete('/', async (request, response) => {
+router.delete('/spinTag', async (request, response) => {
   const result = await spinTagsService.removeTagFromSpin(response, request.body);
   response.send(result);
 });

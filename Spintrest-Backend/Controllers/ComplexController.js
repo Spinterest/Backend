@@ -53,25 +53,25 @@ router.get('/websForUser/:crawlerID', async (request, response) => {
 });
 
 // Get Liked user feed
-router.get('/likedUserFeed', async (request, response) => {
+router.get('/likedUserFeed/:crawlerID/:offset/:limit', async (request, response) => {
   const result = await complexService.getCrawlerFeed(
       response,
-      request.body.crawlerID,
+      request.params.crawlerID,
       true,
-      request.body.offset,
-      request.body.limit
+      request.params.offset,
+      request.params.limit
   );
   response.send(result);
 });
 
 // Get Disliked user feed
-router.get('/dislikedUserFeed', async (request, response) => {
+router.get('/dislikedUserFeed/:crawlerID/:offset/:limit', async (request, response) => {
   const result = await complexService.getCrawlerFeed(
       response,
-      request.body.crawlerID,
+      request.params.crawlerID,
       false,
-      request.body.offset,
-      request.body.limit
+      request.params.offset,
+      request.params.limit
   );
   response.send(result);
 });
