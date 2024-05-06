@@ -5,6 +5,7 @@ const mapSpinComment = (spinComment) => {
         spinID: spinComment.spinid !== undefined ? spinComment.spinid : spinComment.spinID,
         spinCommentID: spinComment.spincommentid !== undefined ? spinComment.spincommentid : spinComment.spinCommentID,
         crawlerID: spinComment.crawlerid !== undefined ? spinComment.crawlerid : spinComment.crawlerID,
+        crawlerUserName: spinComment.crawlerusername !== undefined ? spinComment.crawlerusername : spinComment.crawlerUserName,
         spinCommentMessage: spinComment.spincommentmessage !== undefined ? spinComment.spincommentmessage : spinComment.spinCommentMessage,
         spinCommentTimestamp: spinComment.spincommenttimestamp !== undefined ? spinComment.spincommenttimestamp : spinComment.spinCommentTimestamp,
         spinCommentIsDeleted: spinComment.spincommentisdeleted !== undefined ? spinComment.spincommentisdeleted : spinComment.spinCommentIsDeleted,
