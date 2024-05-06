@@ -4,6 +4,7 @@ const Spin = require('../Models/SpinModel');
 const Web = require('../Models/WebModel');
 const Crawler = require('../Models/CrawlerModel');
 const SpinComment = require('../Models/SpinCommentModel');
+const WebCard = require('../Models/WebCardModel');
 
 const getCrawlersWhoLikedComment = async (spinCommentID) => {
     const result = await databaseContext.query(
@@ -147,6 +148,38 @@ const getCrawlerFeed = async (
     return Spin(result.rows);
 };
 
+const getWebCard = async (webID) => {
+    const result = await databaseContext.query(
+        `select
+            w.webID,
+            w.webTitle,
+            w.webDescription,
+            s.spinLink
+        from
+            Web as w
+            inner join WebSpins as wb on w.webID = wb.webID
+            inner join Spin as s on s.spinID = wb.spinID
+        where
+            w.webID = ${webID} and w.webIsDeleted=false
+        limit 4;`
+    );
+    if (result.rows==null){
+        const backup = await databaseContext.query(
+            `select
+                w.webID,
+                w.webTitle,
+                w.webDescription
+            from
+                Web as w
+            where
+                w.webID = ${webID} and w.webIsDeleted=false
+            limit 4;` 
+        )
+        return(backup.rows);
+    };
+    return WebCard(result.rows);
+};
+
 module.exports = {
     getCrawlerFeed,
     getSpinsForWeb,
@@ -154,5 +187,6 @@ module.exports = {
     getCommentsForSpin,
     getCrawlersWhoLikedSpin,
     getNumberOfSpinsInWeb,
-    getCrawlersWhoLikedComment
+    getCrawlersWhoLikedComment,
+    getWebCard
 };

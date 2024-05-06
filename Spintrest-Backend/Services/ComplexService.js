@@ -120,6 +120,21 @@ const getCrawlerFeed = async (response,
     }
 };
 
+const getWebCard = async (response, webID) => {
+    if (
+        errorHandler.variableChecker(
+            response, 
+            webID
+        )
+    ){
+        return await errorHandler.queryWrapper(
+            response, 
+            complexRepository.getWebCard,
+            webID
+        );
+    }
+};
+
 module.exports = {
     getCrawlerFeed,
     getSpinsForWeb,
@@ -127,5 +142,6 @@ module.exports = {
     getCommentsForSpin,
     getCrawlersWhoLikedSpin,
     getNumberOfSpinsInWeb,
-    getCrawlersWhoLikedComment
+    getCrawlersWhoLikedComment,
+    getWebCard
 };
