@@ -25,6 +25,15 @@ jobs:
           role-session-name: ${!{ github.workflow }}-build-${{ github.run_id }}
           aws-region: eu-west-1
 
+      - name: Update Release with .env
+        run: |
+          echo "DB_HOST_LOCAL:${{secrets.DB_ENDPOINT}}" >> .env
+          echo "DB_USER_LOCAL:${{secrets.DB_USERNAME}}" >> .env
+          echo "DB_PASSWORD_LOCAL:${{secrets.DB_PASSWORD }}" >> .env
+          echo "DB_DATABASE_LOCAL:spinterestdb" >> .env
+          echo "DB_PORT_LOCAL:${{secrets.DB_PORT}}" >> .env
+        working-directory: Spinterest-Backend
+
       - name: Package artifact
         run: zip -r ../spinterest.zip *
         working-directory: Spinterest-Backend
@@ -32,6 +41,7 @@ jobs:
       - name: Upload artifact to S3
         run: aws s3 cp sinterest.zip s3://${{ secrets.BUCKET_NAME }}/application-${{ github.run_id }}.zip
         working-directory: Spinterest-Backend
+
 
   deploy:
     runs-on: ubuntu-latest
