@@ -42,7 +42,7 @@ jobs:
         working-directory: Spintrest-Backend
 
       - name: Package artifact
-        run: zip -r ../spinterest.zip *
+        run: zip -r spinterest.zip *
         working-directory: Spintrest-Backend
 
       - name: Upload artifact to S3
