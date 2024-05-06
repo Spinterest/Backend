@@ -34,11 +34,11 @@ jobs:
 
       - name: Update Release with .env
         run: |
-          echo "DB_HOST_LOCAL:${{secrets.DB_ENDPOINT}}" >> .env
-          echo "DB_USER_LOCAL:${{secrets.DB_USERNAME}}" >> .env
-          echo "DB_PASSWORD_LOCAL:${{secrets.DB_PASSWORD }}" >> .env
-          echo "DB_DATABASE_LOCAL:spinterestdb" >> .env
-          echo "DB_PORT_LOCAL:${{secrets.DB_PORT}}" >> .env
+          echo "DB_HOST_LOCAL:${{secrets.DB_ENDPOINT}}" >> Spintrest-Backend/.env
+          echo "DB_USER_LOCAL:${{secrets.DB_USERNAME}}" >> Spintrest-Backend/.env
+          echo "DB_PASSWORD_LOCAL:${{secrets.DB_PASSWORD }}" >> Spintrest-Backend/.env
+          echo "DB_DATABASE_LOCAL:spinterestdb" >> Spintrest-Backend/.env
+          echo "DB_PORT_LOCAL:${{secrets.DB_PORT}}" >> Spintrest-Backend/.env
         working-directory: Spintrest-Backend
 
       - name: Package artifact
