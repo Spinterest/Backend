@@ -11,6 +11,11 @@ const queryWrapper = async (
     }
 }
 
+const throwAlert = (message) => {
+    console.log(`Alert: ${message}`);
+    return {alert: message};
+}
+
 const variableChecker = (
     response,
     ...parameters
@@ -54,5 +59,6 @@ const jsonChecker = (
 module.exports = {
     queryWrapper,
     variableChecker,
-    jsonChecker
+    jsonChecker,
+    throwAlert
 };

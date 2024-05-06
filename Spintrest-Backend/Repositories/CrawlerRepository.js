@@ -31,65 +31,89 @@ const getUserWithEmail = async (
 
 const addUserWithEmail = async (crawlerEmail) => {
     const crawlerUserName = crawlerEmail?.split('@')[0] || crawlerEmail;
-    return await databaseContext.query(
+    await databaseContext.query(
         `insert into 
         Crawler (crawlerEmail, crawlerUserName) 
         values ('${crawlerEmail}', '${crawlerUserName}');`
     );
+
+    return await getUserWithEmail(crawlerEmail);
 }
 
 const deleteUserWithID = async (crawlerID) => {
-    return await databaseContext.query(
+    await databaseContext.query(
         `update Crawler
         set crawlerIsDeleted = true
         where crawlerID = ${crawlerID};`
     );
+
+    return await getUserWithID(crawlerID, true);
 }
 
 const deleteUserWithEmail = async (crawlerEmail) => {
-    return await databaseContext.query(
+    await databaseContext.query(
         `update Crawler
         set crawlerIsDeleted = true
         where crawlerEmail = '${crawlerEmail}';`
     );
+
+    return await getUserWithEmail(crawlerEmail, true);
 }
 
 const restoreUserWithID = async (crawlerID) => {
-    return await databaseContext.query(
+    await databaseContext.query(
         `update Crawler
         set crawlerIsDeleted = false
         where crawlerID = ${crawlerID};`
     );
+
+    return await getUserWithID(crawlerID);
 }
 
 const restoreUserWithEmail = async (crawlerEmail) => {
-    return await databaseContext.query(
+    await databaseContext.query(
         `update Crawler
         set crawlerIsDeleted = false
         where crawlerEmail = '${crawlerEmail}';`
     );
+
+    return await getUserWithEmail(crawlerEmail);
 }
 
 const editCrawlerNameWithID = async (
     crawlerID,
     crawlerUserName
 ) => {
-    return await databaseContext.query(
+    await databaseContext.query(
         `update Crawler
         set crawlerUserName = '${crawlerUserName}'
         where crawlerID = '${crawlerID}';`
     );
+
+    return await getUserWithID(crawlerID);
 }
 
 const editCrawlerNameWithEmail = async (
     crawlerEmail,
     crawlerUserName
 ) => {
-    return await databaseContext.query(
+    await databaseContext.query(
         `update Crawler
         set crawlerUserName = '${crawlerUserName}'
         where crawlerEmail = '${crawlerEmail}';`
     );
+
+    return await getUserWithEmail(crawlerEmail);
+}
+
+const isUsernameAvailable = async (crawlerUserName) => {
+    const result = await databaseContext.query(
+        `select count(*) as count
+        from Crawler
+        where crawlerUserName = '${crawlerUserName}';`
+    );
+
+    return result.rows[0];
 }
 
 module.exports = {
@@ -97,9 +121,10 @@ module.exports = {
     getUserWithEmail,
     addUserWithEmail,
     deleteUserWithID,
+    restoreUserWithID,
+    isUsernameAvailable,
     deleteUserWithEmail,
     restoreUserWithEmail,
-    restoreUserWithID,
     editCrawlerNameWithID,
     editCrawlerNameWithEmail
 };

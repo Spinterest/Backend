@@ -44,17 +44,19 @@ const getCommentsForSpin = async (spinID) => {
     const result = await databaseContext.query(
         `select
             sc.spinCommentID,
-                min(sc.crawlerID) as crawlerID,
-                min(sc.spinID) as spinID,
-                min(sc.spinCommentMessage) as spinCommentMessage,
-                min(sc.spinCommentTimestamp) as spinCommentTimestamp,
-                bool_and(sc.spinCommentIsDeleted) as spinCommentIsDeleted,
-                coalesce(count(c.crawlerID), 0) as spinCommentLikeCount
+            min(sc.crawlerID) as crawlerID,
+            min(uc.crawlerUserName) as crawlerUserName,
+            min(sc.spinID) as spinID,
+            min(sc.spinCommentMessage) as spinCommentMessage,
+            min(sc.spinCommentTimestamp) as spinCommentTimestamp,
+            bool_and(sc.spinCommentIsDeleted) as spinCommentIsDeleted,
+            coalesce(count(c.crawlerID), 0) as spinCommentLikeCount
         from
             SpinComment as sc
             inner join Spin as s on s.spinID = sc.spinID
             left join CommentLikes as cl on cl.spinCommentID = sc.spinCommentID
             left join Crawler as c on cl.crawlerID = c.crawlerID
+            inner join Crawler as uc on uc.crawlerID = sc.crawlerID
         where
             sc.spinCommentIsDeleted = false and
             s.spinIsDeleted = false and
