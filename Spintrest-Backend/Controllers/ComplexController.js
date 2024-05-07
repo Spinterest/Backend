@@ -76,14 +76,5 @@ router.get('/dislikedUserFeed/:crawlerID/:offset/:limit', async (request, respon
   response.send(result);
 });
 
-//Get Web Card
-router.get('/web/:webID', async (request, response) => {
-  const result = await complexService.getWebCard(
-      response,
-      request.params.webID
-  );
-  response.send(result);
-});
-
 
 module.exports = router
