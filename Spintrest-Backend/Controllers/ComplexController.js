@@ -76,5 +76,11 @@ router.get('/dislikedUserFeed/:crawlerID/:offset/:limit', async (request, respon
   response.send(result);
 });
 
+// Get list of comments that a crawler has liked.
+router.get('/commentsLikedByCrawlerID/:crawlerID', async (request, response) => {
+  const result = await complexService.getCommentsLikedByCrawlerID(response, request.params.crawlerID);
+  response.send(result);
+});
+
 
 module.exports = router

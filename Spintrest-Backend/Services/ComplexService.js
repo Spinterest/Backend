@@ -120,6 +120,21 @@ const getCrawlerFeed = async (response,
     }
 };
 
+const getCommentsLikedByCrawlerID = async (response, crawlerID) => {
+    if (
+        errorHandler.variableChecker(
+            response,
+            crawlerID
+        )
+    ){
+        return await errorHandler.queryWrapper(
+            response,
+            complexRepository.getCommentsLikedByCrawlerID,
+            crawlerID
+        );
+    }
+}
+
 module.exports = {
     getCrawlerFeed,
     getSpinsForWeb,
@@ -127,5 +142,6 @@ module.exports = {
     getCommentsForSpin,
     getCrawlersWhoLikedSpin,
     getNumberOfSpinsInWeb,
-    getCrawlersWhoLikedComment
+    getCrawlersWhoLikedComment,
+    getCommentsLikedByCrawlerID
 };
