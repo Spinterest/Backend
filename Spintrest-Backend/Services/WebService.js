@@ -1,5 +1,6 @@
 const errorHandler = require('../SQLErrorHandler');
 const webRepository = require('../Repositories/WebRepository');
+const crawlerRepository = require("../Repositories/CrawlerRepository");
 
 const getWebWithID = async (response, spinID) => {
     if (
@@ -102,6 +103,16 @@ const createWeb = async (response, web) => {
             ['webDescription', 'webTitle', 'crawlerID']
         )
     ){
+        const crawler = await errorHandler.queryWrapper(
+            response,
+            crawlerRepository.getUserWithID,
+            web.crawlerID
+        );
+
+        if (response.statusCode === 500 || !crawler){
+            return errorHandler.throwAlert(`No crawler is registered with that ID`);
+        }
+
         return await errorHandler.queryWrapper(
             response,
             webRepository.createWeb,
