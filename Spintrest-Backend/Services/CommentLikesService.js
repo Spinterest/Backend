@@ -1,5 +1,6 @@
 const errorHandler = require('../SQLErrorHandler');
 const commentLikesRepository = require('../Repositories/CommentLikesRepository');
+const webSpinsRepository = require("../Repositories/WebSpinsRepository");
 
 const likeComment = async (response, commentLike) => {
     if (
@@ -9,6 +10,21 @@ const likeComment = async (response, commentLike) => {
             ['crawlerID', 'spinCommentID']
         )
     ){
+        const result = await errorHandler.queryWrapper(
+            response,
+            commentLikesRepository.isCommentLikePairUnique,
+            commentLike
+        );
+
+        if (response.statusCode === 500){
+            // unhandled unexpected error
+            return;
+        }
+
+        if (result.result === 'false'){
+            return errorHandler.throwAlert('Pair already existed');
+        }
+
         return await errorHandler.queryWrapper(
             response,
             commentLikesRepository.likeComment,
@@ -25,6 +41,21 @@ const removeLikeFromComment = async (response, commentLike) => {
             ['crawlerID', 'spinCommentID']
         )
     ){
+        const result = await errorHandler.queryWrapper(
+            response,
+            webSpinsRepository.isWebSpinPairUnique,
+            commentLike
+        );
+
+        if (response.statusCode === 500){
+            // unhandled unexpected error
+            return;
+        }
+
+        if (result.result === 'true'){
+            return errorHandler.throwAlert('Pair never existed');
+        }
+
         return await errorHandler.queryWrapper(
             response,
             commentLikesRepository.removeLikeFromComment,
