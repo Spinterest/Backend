@@ -1,3 +1,4 @@
+const S3 = require('../S3.js');
 const complexService = require('../Services/ComplexService');
 const express = require('express')
 const router = express.Router()
@@ -91,6 +92,11 @@ router.get('/commentsLikedByCrawlerID/:crawlerID', async (request, response) => 
   const result = await complexService.getCommentsLikedByCrawlerID(response, request.params.crawlerID);
   response.send(result);
 });
+
+router.get('/spinLink', async (request, response) => {
+  const result = await S3();
+  response.send({result});
+})
 
 // Get list of top tags.
 router.post('/topTags', async (request, response) => {
