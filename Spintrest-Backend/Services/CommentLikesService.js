@@ -1,6 +1,5 @@
 const errorHandler = require('../SQLErrorHandler');
 const commentLikesRepository = require('../Repositories/CommentLikesRepository');
-const webSpinsRepository = require("../Repositories/WebSpinsRepository");
 
 const likeComment = async (response, commentLike) => {
     if (
@@ -43,7 +42,7 @@ const removeLikeFromComment = async (response, commentLike) => {
     ){
         const result = await errorHandler.queryWrapper(
             response,
-            webSpinsRepository.isWebSpinPairUnique,
+            commentLikesRepository.isCommentLikePairUnique,
             commentLike
         );
 
