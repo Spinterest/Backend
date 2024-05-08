@@ -14,7 +14,7 @@ router.post('/commentLike', async (request, response) => {
 });
 
 // Remove Like from Spin
-router.delete('/commentLike', async (request, response) => {
+router.delete('/dislikeComment', async (request, response) => {
   const result = await commentLikesService.removeLikeFromComment(response, request.body);
   response.send(result);
 });

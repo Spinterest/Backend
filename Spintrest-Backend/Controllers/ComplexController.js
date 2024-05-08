@@ -92,4 +92,10 @@ router.get('/commentsLikedByCrawlerID/:crawlerID', async (request, response) => 
   response.send(result);
 });
 
+// Get list of top tags.
+router.get('/topTags', async (request, response) => {
+  const result = await complexService.getTopTags(response);
+  response.send(result);
+});
+
 module.exports = router
