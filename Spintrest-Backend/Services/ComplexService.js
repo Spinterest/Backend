@@ -120,6 +120,18 @@ const getCrawlerFeed = async (response,
     }
 };
 
+const getUnloggedCrawlerFeed = async (response,
+    offset,
+    limit
+) => {
+    return await errorHandler.queryWrapper(
+        response,
+        complexRepository.getUnloggedCrawlerFeed,
+        offset || 0,
+        limit || 100
+    );
+};
+
 const getCommentsLikedByCrawlerID = async (response, crawlerID) => {
     if (
         errorHandler.variableChecker(
@@ -143,5 +155,6 @@ module.exports = {
     getCrawlersWhoLikedSpin,
     getNumberOfSpinsInWeb,
     getCrawlersWhoLikedComment,
+    getUnloggedCrawlerFeed,
     getCommentsLikedByCrawlerID
 };
