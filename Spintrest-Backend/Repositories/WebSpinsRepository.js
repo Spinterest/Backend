@@ -17,7 +17,25 @@ const removeSpinFromWeb = async (webSpin) => {
     );
 }
 
+const isWebSpinPairUnique = async (webSpin) => {
+    const result = await databaseContext.query(
+        `select
+            case
+                when count(*) = 0 then 'true'
+                else 'false'
+            end as result
+        from
+            WebSpins
+        where
+            webID = ${webSpin.webID} and
+            spinID = ${webSpin.spinID};`
+    );
+
+    return result.rows[0];
+}
+
 module.exports = {
     addSpinToWeb,
-    removeSpinFromWeb
+    removeSpinFromWeb,
+    isWebSpinPairUnique
 };
