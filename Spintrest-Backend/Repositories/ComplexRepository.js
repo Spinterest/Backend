@@ -186,7 +186,13 @@ const getCommentsLikedByCrawlerID = async (crawlerID) => {
     return SpinComment(result.rows);
 };
 
-const getTopTags = async () => {
+const getTopTags = async (existingTags) => {
+    let whereClause = '';
+    if (existingTags.length !== 0) {
+        whereClause =
+            `where
+                t.tagName not in ('${existingTags.join("', '")}')`;
+    }
     const result = await databaseContext.query(
         `select 
             t.tagID,
@@ -195,6 +201,7 @@ const getTopTags = async () => {
         from
             Tag as t
             inner join SpinTags as st on t.tagID = st.tagID
+        ${whereClause}
         group by
             t.tagID
         order by
