@@ -109,7 +109,7 @@ const getCrawlerFeed = async (response,
             isLikedTags
         )
     ){
-        return await errorHandler.queryWrapper(
+        const result = await errorHandler.queryWrapper(
             response,
             complexRepository.getCrawlerFeed,
             crawlerID,
@@ -117,10 +117,22 @@ const getCrawlerFeed = async (response,
             offset || 0,
             limit || 100
         );
+
+        if (response.statusCode !== 500 && !result){
+            return await errorHandler.queryWrapper(
+                response,
+                complexRepository.getUnloggedCrawlerFeed,
+                offset || 0,
+                limit || 100
+            );
+        }
+
+        return result;
     }
 };
 
-const getUnloggedCrawlerFeed = async (response,
+const getUnloggedCrawlerFeed = async (
+    response,
     offset,
     limit
 ) => {
@@ -132,11 +144,18 @@ const getUnloggedCrawlerFeed = async (response,
     );
 };
 
-const getTopTags = async (response) => {
-    return await errorHandler.queryWrapper(
+const getTopTags = async (response, existingTags) => {
+    if (errorHandler.jsonChecker(
         response,
-        complexRepository.getTopTags
-    );
+        existingTags,
+        ['existingTags']
+    )){
+        return await errorHandler.queryWrapper(
+            response,
+            complexRepository.getTopTags,
+            existingTags.existingTags
+        );
+    }
 };
 
 const getCommentsLikedByCrawlerID = async (response, crawlerID) => {
