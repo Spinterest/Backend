@@ -4,7 +4,7 @@ const Spin = require('../Models/SpinModel');
 const Web = require('../Models/WebModel');
 const Crawler = require('../Models/CrawlerModel');
 const SpinComment = require('../Models/SpinCommentModel');
-const WebCard = require('../Models/WebCardModel');
+const Tag = require('../Models/TagModel');
 
 const getCrawlersWhoLikedComment = async (spinCommentID) => {
     const result = await databaseContext.query(
@@ -186,6 +186,25 @@ const getCommentsLikedByCrawlerID = async (crawlerID) => {
     return SpinComment(result.rows);
 };
 
+const getTopTags = async () => {
+    const result = await databaseContext.query(
+        `select 
+            t.tagID,
+            min(t.tagName) as tagName,
+            count(*) as frequency
+        from
+            Tag as t
+            inner join SpinTags as st on t.tagID = st.tagID
+        group by
+            t.tagID
+        order by
+            frequency desc
+        limit 3;`
+    );
+
+    return Tag(result.rows);
+};
+
 module.exports = {
     getCrawlerFeed,
     getSpinsForWeb,
@@ -195,5 +214,6 @@ module.exports = {
     getNumberOfSpinsInWeb,
     getCrawlersWhoLikedComment,
     getUnloggedCrawlerFeed,
-    getCommentsLikedByCrawlerID
+    getCommentsLikedByCrawlerID,
+    getTopTags
 };

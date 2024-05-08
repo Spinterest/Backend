@@ -17,7 +17,13 @@ const addTag = async (tagName) => {
 
 const filterTags = async (tagName) => {
     const result = await databaseContext.query(
-        `select * from Tag where tagName like '%${tagName}%';`
+        `select 
+            * 
+        from 
+            Tag 
+        where 
+            tagName like '%${tagName}%'
+        limit 3;`
     );
 
     return tagModel(result.rows);
