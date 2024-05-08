@@ -92,6 +92,4 @@ router.get('/commentsLikedByCrawlerID/:crawlerID', async (request, response) => 
   response.send(result);
 });
 
-
-
 module.exports = router
