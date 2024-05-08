@@ -171,6 +171,21 @@ const getUnloggedCrawlerFeed = async (
     return Spin(result.rows);
 };
 
+const getCommentsLikedByCrawlerID = async (crawlerID) => {
+    const result = await databaseContext.query(
+        `select 
+            sc.* 
+        from 
+            Crawler as c
+            inner join CommentLikes as cl on c.crawlerID = cl.crawlerID
+            inner join SpinComment as sc on sc.spinCommentID = cl.spinCommentID
+        where
+            c.crawlerID = ${crawlerID};`
+    );
+
+    return SpinComment(result.rows);
+};
+
 module.exports = {
     getCrawlerFeed,
     getSpinsForWeb,
@@ -179,5 +194,6 @@ module.exports = {
     getCrawlersWhoLikedSpin,
     getNumberOfSpinsInWeb,
     getCrawlersWhoLikedComment,
-    getUnloggedCrawlerFeed
+    getUnloggedCrawlerFeed,
+    getCommentsLikedByCrawlerID
 };
