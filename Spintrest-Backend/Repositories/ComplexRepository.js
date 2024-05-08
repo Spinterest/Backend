@@ -165,6 +165,16 @@ const getCommentsLikedByCrawlerID = async (crawlerID) => {
     return SpinComment(result.rows);
 };
 
+// Todo add more logic
+const getAllSpins = async () => {
+    const result = await databaseContext.query(
+        `select * 
+        from Spin;`
+    );
+
+    return Spin(result.rows);
+}
+
 module.exports = {
     getCrawlerFeed,
     getSpinsForWeb,
@@ -173,5 +183,6 @@ module.exports = {
     getCrawlersWhoLikedSpin,
     getNumberOfSpinsInWeb,
     getCrawlersWhoLikedComment,
-    getCommentsLikedByCrawlerID
+    getCommentsLikedByCrawlerID,
+    getAllSpins
 };

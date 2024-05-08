@@ -135,6 +135,13 @@ const getCommentsLikedByCrawlerID = async (response, crawlerID) => {
     }
 }
 
+const getAllSpins = async (response) => {
+    return await errorHandler.queryWrapper(
+        response,
+        complexRepository.getAllSpins,
+    );
+}
+
 module.exports = {
     getCrawlerFeed,
     getSpinsForWeb,
@@ -143,5 +150,6 @@ module.exports = {
     getCrawlersWhoLikedSpin,
     getNumberOfSpinsInWeb,
     getCrawlersWhoLikedComment,
-    getCommentsLikedByCrawlerID
+    getCommentsLikedByCrawlerID,
+    getAllSpins
 };

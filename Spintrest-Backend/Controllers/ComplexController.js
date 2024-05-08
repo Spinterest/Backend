@@ -82,5 +82,11 @@ router.get('/commentsLikedByCrawlerID/:crawlerID', async (request, response) => 
   response.send(result);
 });
 
+// Get list of comments that a crawler has liked.
+router.get('/allSpins', async (request, response) => {
+  const result = await complexService.getAllSpins(response);
+  response.send(result);
+});
+
 
 module.exports = router
