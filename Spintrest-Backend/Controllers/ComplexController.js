@@ -76,5 +76,15 @@ router.get('/dislikedUserFeed/:crawlerID/:offset/:limit', async (request, respon
   response.send(result);
 });
 
+// Get Disliked user feed
+router.get('/unLoggedInUserFeed/:offset/:limit', async (request, response) => {
+  const result = await complexService.getUnloggedCrawlerFeed(
+      response,
+      request.params.offset,
+      request.params.limit
+  );
+  response.send(result);
+});
+
 
 module.exports = router

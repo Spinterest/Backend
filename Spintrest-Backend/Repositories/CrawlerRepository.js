@@ -30,6 +30,7 @@ const getUserWithEmail = async (
 };
 
 const addUserWithEmail = async (crawlerEmail) => {
+    console.log(crawlerEmail);
     const crawlerUserName = crawlerEmail?.split('@')[0] || crawlerEmail;
     await databaseContext.query(
         `insert into 

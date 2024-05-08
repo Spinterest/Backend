@@ -150,6 +150,27 @@ const getCrawlerFeed = async (
     return Spin(result.rows);
 };
 
+const getUnloggedCrawlerFeed = async (
+    offset,
+    limit
+) => {
+    const result = await databaseContext.query(
+        `select
+            s.spinID,
+            min(s.spinLink) as spinLink
+        from
+            Spin as s
+        where
+            s.spinIsDeleted = false
+        group by
+            s.spinID
+        limit ${limit}
+        offset ${offset};`
+    );
+
+    return Spin(result.rows);
+};
+
 module.exports = {
     getCrawlerFeed,
     getSpinsForWeb,
@@ -157,5 +178,6 @@ module.exports = {
     getCommentsForSpin,
     getCrawlersWhoLikedSpin,
     getNumberOfSpinsInWeb,
-    getCrawlersWhoLikedComment
+    getCrawlersWhoLikedComment,
+    getUnloggedCrawlerFeed
 };
