@@ -15,9 +15,21 @@ const addTag = async (tagName) => {
     );
 }
 
-const filterTags = async (tagName) => {
+const filterTags = async (tagName, existingTags) => {
+    let whereClause = '';
+    if (existingTags.length !== 0) {
+        whereClause =
+            `and
+            tagName not in ('${existingTags.join("', '")}')`;
+    }
     const result = await databaseContext.query(
-        `select * from Tag where tagName like '%${tagName}%';`
+        `select 
+            * 
+        from 
+            Tag 
+        where 
+            tagName like '%${tagName}%' ${whereClause}
+        limit 3;`
     );
 
     return tagModel(result.rows);

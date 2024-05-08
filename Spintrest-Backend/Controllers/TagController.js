@@ -20,8 +20,8 @@ router.post('/createTag', async (request, response) => {
 });
 
 // Get Filtered Tag Results
-router.get('/filter/tagName/:tagName', async (request, response) => {
-  const result = await tagService.filterTags(response, request.params.tagName);
+router.post('/filter/tagName', async (request, response) => {
+  const result = await tagService.filterTags(response, request.body);
   response.send(result);
 });
 

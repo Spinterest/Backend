@@ -96,6 +96,12 @@ router.get('/commentsLikedByCrawlerID/:crawlerID', async (request, response) => 
 router.get('/spinLink', async (request, response) => {
   const result = await S3();
   response.send({result});
+})
+
+// Get list of top tags.
+router.post('/topTags', async (request, response) => {
+  const result = await complexService.getTopTags(response, request.body);
+  response.send(result);
 });
 
 module.exports = router

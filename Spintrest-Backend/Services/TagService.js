@@ -32,17 +32,19 @@ const addTag = async (response, tag) => {
     }
 }
 
-const filterTags = async (response, tagName) => {
+const filterTags = async (response, tagData) => {
     if (
-        errorHandler.variableChecker(
+        errorHandler.jsonChecker(
             response,
-            tagName
+            tagData,
+            ['tagName', 'existingTags']
         )
     ){
         return await errorHandler.queryWrapper(
             response,
             tagRepository.filterTags,
-            tagName
+            tagData.tagName,
+            tagData.existingTags
         );
     }
 }
