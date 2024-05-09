@@ -45,7 +45,7 @@ const jsonChecker = (
                     response.status(500).json({error: `expected key: ${key}`});
                     return;
                 }
-                if (!body[key]){
+                if (body[key] == null){
                     console.error(`Error, undefined value for key: ${key}`);
                     response.status(500).json({error: `undefined value for key: ${key}`});
                 }
