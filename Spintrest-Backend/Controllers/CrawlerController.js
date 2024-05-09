@@ -1,9 +1,10 @@
 const crawlerService = require('../Services/CrawlerService');
 const express = require('express');
 const router = express.Router();
+const authorize = require('../Authorizer')
 
 // Todo, might want to remove await
-router.get('/', (request, response) => {
+router.get('/', authorize, (request, response) => {
     response.send('Crawler User Homepage');
 });
 
