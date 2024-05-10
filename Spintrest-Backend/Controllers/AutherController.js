@@ -53,10 +53,7 @@ router.post('/getAccessToken', async (request, response) => {
         .then(async (postResponse)  =>  {
             try{
                 const jsonResponse = await postResponse.json();
-                response.send({
-                    access_token: jsonResponse.access_token,
-                    refresh_token: jsonResponse.refresh_token
-                });
+                response.send(jsonResponse);
             }
             catch (error){
                 response.status(500).json({error: error});
