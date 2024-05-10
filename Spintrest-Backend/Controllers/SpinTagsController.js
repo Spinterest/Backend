@@ -13,6 +13,12 @@ router.post('/spinTag', async (request, response) => {
   response.send(result);
 });
 
+// Adding
+router.post('/addTagsToSpinByTagNames', async (request, response) => {
+  const result = await spinTagsService.addTagsToSpinByTagNames(response, request.body);
+  response.send(result);
+});
+
 // Delete SpinTag
 router.delete('/spinTag', async (request, response) => {
   const result = await spinTagsService.removeTagFromSpin(response, request.body);

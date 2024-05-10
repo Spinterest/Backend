@@ -15,11 +15,11 @@ const s3 = new aws.S3({
 })
 
 async function generateSpinLink() {
-    var randomBytes = util.promisify(crypto.randomBytes)
-    var rawBytes = await randomBytes(16);
-    var imageName = rawBytes.toString('hex');
+    let randomBytes = util.promisify(crypto.randomBytes)
+    let rawBytes = await randomBytes(16);
+    let imageName = rawBytes.toString('hex');
 
-    var links = await databaseContext.query(
+    let links = await databaseContext.query(
         `select
             spinlink
         from

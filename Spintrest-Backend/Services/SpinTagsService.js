@@ -33,7 +33,25 @@ const removeTagFromSpin = async (response, spinTag) => {
     }
 }
 
+const addTagsToSpinByTagNames = async (response, spinTags) => {
+    if (
+        errorHandler.jsonChecker(
+            response,
+            spinTags,
+            ['spinLink', 'tagNames']
+        )
+    ){
+        return await errorHandler.queryWrapper(
+            response,
+            spinTagsRepository.addTagsToSpinByTagNames,
+            spinTags.spinLink,
+            spinTags.tagNames
+        );
+    }
+}
+
 module.exports = {
     addTagToSpin,
-    removeTagFromSpin
+    removeTagFromSpin,
+    addTagsToSpinByTagNames
 };

@@ -8,6 +8,7 @@ const webSpins = require('./Controllers/WebSpinsController');
 const spinLikes = require('./Controllers/SpinLikesController');
 const commentLikes = require('./Controllers/CommentLikesController');
 const complexCalls = require('./Controllers/ComplexController');
+const auther = require('./Controllers/AutherController');
 
 const express = require("express");
 const cors = require('cors');
@@ -22,6 +23,7 @@ app.get('/', function(req, res){
     res.send("Hello world!");
  });
 
+app.use('/auth', auther);
 app.use('/crawlers', crawlers);
 app.use('/webs', webs);
 app.use('/spins', spins);

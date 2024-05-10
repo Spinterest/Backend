@@ -21,13 +21,13 @@ const addTag = async (response, tag) => {
         errorHandler.jsonChecker(
             response,
             tag,
-            ['tagName']
+            ['tagNames']
         )
     ){
         return await errorHandler.queryWrapper(
             response,
             tagRepository.addTag,
-            tag.tagName
+            tag.tagNames
         );
     }
 }
