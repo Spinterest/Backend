@@ -3,7 +3,7 @@ const router = express.Router()
 
 const secret = process.env.GOOGLE_SECRET;
 const clientID = process.env.GOOGLE_CLIENT_ID;
-const redirectUri = "http://localhost:3000/";
+const redirectUri = "http://spinfront.eu-west-1.elasticbeanstalk.com/";
 
 function encodeParams(params) {
     return Object.keys(params)
